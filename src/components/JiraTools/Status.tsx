@@ -43,7 +43,7 @@ export const Status = ({
 
       return "Valid issue key found in clipboard. Click the button above to continue.";
     } else {
-      return "Invalid content in clipboard.";
+      return "No valid issue key found in clipboard.";
     }
   };
 
@@ -56,7 +56,7 @@ export const Status = ({
     >
       <Stack>
         {getStatusMessage()}
-        <BranchName>{branchName}</BranchName>
+        {branchName !== "" && <BranchName>{branchName}</BranchName>}
       </Stack>
     </StatusContainer>
   );

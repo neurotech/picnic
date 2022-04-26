@@ -15,20 +15,26 @@ const getVariantColours = (variant: TileVariant) => {
   switch (variant) {
     case "green":
       return {
-        normal: { background: palette.green, text: palette.white },
-        hover: {
+        normal: {
+          background: palette.green,
           border: palette.darkgreen,
           text: palette.darkgreen,
+        },
+        hover: {
+          text: palette.white,
           background: palette.lightgreen,
         },
       };
 
     case "yellow":
       return {
-        normal: { background: palette.yellow, text: palette.white },
-        hover: {
+        normal: {
+          background: palette.yellow,
           border: palette.darkyellow,
           text: palette.darkyellow,
+        },
+        hover: {
+          text: palette.white,
           background: palette.lightyellow,
         },
       };
@@ -36,10 +42,13 @@ const getVariantColours = (variant: TileVariant) => {
     case "blue":
     default:
       return {
-        normal: { background: palette.blue, text: palette.white },
-        hover: {
+        normal: {
+          background: palette.blue,
           border: palette.darkblue,
           text: palette.darkblue,
+        },
+        hover: {
+          text: palette.white,
           background: palette.lightblue,
         },
       };
@@ -50,18 +59,19 @@ const StyledTileHeader = styled.div<{ variant: TileVariant }>`
   user-select: none;
   background-color: ${(props) =>
     getVariantColours(props.variant).normal.background};
-  border: 2px solid ${palette.darkgray};
   border-radius: 4px 4px 0 0;
+  border-width: 2px;
+  border-style: solid;
+  border-color: ${(props) => getVariantColours(props.variant).normal.border};
+  color: ${(props) => getVariantColours(props.variant).normal.text};
   font-weight: bold;
   padding: 0;
-  text-shadow: 1px 1px 0 ${palette.darkgray};
 
   > * {
     cursor: pointer;
   }
 
   :hover {
-    border-color: ${(props) => getVariantColours(props.variant).hover.border};
     color: ${(props) => getVariantColours(props.variant).hover.text};
     background-color: ${(props) =>
       getVariantColours(props.variant).hover.background};
