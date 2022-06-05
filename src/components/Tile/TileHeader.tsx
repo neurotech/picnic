@@ -17,8 +17,8 @@ const getVariantColours = (variant: TileVariant) => {
       return {
         normal: {
           background: palette.green,
-          border: palette.darkgreen,
-          text: palette.darkgreen,
+          border: palette.darkgray,
+          text: palette.darkgray,
         },
         hover: {
           text: palette.white,
@@ -30,8 +30,8 @@ const getVariantColours = (variant: TileVariant) => {
       return {
         normal: {
           background: palette.yellow,
-          border: palette.darkyellow,
-          text: palette.darkyellow,
+          border: palette.darkgray,
+          text: palette.darkgray,
         },
         hover: {
           text: palette.white,
@@ -44,8 +44,8 @@ const getVariantColours = (variant: TileVariant) => {
       return {
         normal: {
           background: palette.blue,
-          border: palette.darkblue,
-          text: palette.darkblue,
+          border: palette.darkgray,
+          text: palette.darkgray,
         },
         hover: {
           text: palette.white,

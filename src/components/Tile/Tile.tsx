@@ -17,6 +17,7 @@ const TileBody = styled.div`
   border: 2px solid ${palette.darkgray};
   border-top-width: 0;
   border-radius: 0 0 4px 4px;
+  color: ${palette.ash};
   padding: 1rem;
 `;
 

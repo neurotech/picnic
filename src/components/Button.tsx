@@ -3,27 +3,32 @@ import { fontFamily } from "../styles/GlobalStyles";
 import { palette } from "../styles/palette";
 
 interface ButtonProps {
-  disabled: boolean;
+  disabled?: boolean;
+  emoji?: string;
   label: string;
   onClick: () => void;
 }
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<Pick<ButtonProps, "emoji">>`
   background-color: ${palette.red};
   border-radius: 6px;
   border: 2px solid ${palette.darkred};
+  color: ${palette.white};
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: ${(props) => (props.emoji ? "space-between" : "center")};
   font-family: ${fontFamily};
   font-size: 1rem;
   font-weight: 500;
   line-height: 1rem;
   margin: 0;
-  height: 3.5rem;
+  min-height: 2.5rem;
+  min-width: ${(props) => (props.emoji ? "8.75rem" : "7rem")};
   padding: 0 1rem;
-  color: ${palette.white};
   text-shadow: 1px 1px 0 ${palette.darkred};
-
-  transition: background-color 0.1s, color 0.1s;
+  transition: background-color 0.1s ease 0s, color 0.1s ease 0s,
+    text-shadow 0.1s ease 0s;
 
   :hover {
     background-color: ${palette.lightred};
@@ -40,10 +45,11 @@ const StyledButton = styled.button`
   }
 `;
 
-export const Button = ({ disabled, label, onClick }: ButtonProps) => {
+export const Button = ({ disabled, emoji, label, onClick }: ButtonProps) => {
   return (
-    <StyledButton disabled={disabled} onClick={onClick}>
-      {label}
+    <StyledButton emoji={emoji} disabled={disabled} onClick={onClick}>
+      <span>{label}</span>
+      {emoji !== "" && <span>{emoji}</span>}
     </StyledButton>
   );
 };

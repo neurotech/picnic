@@ -12,16 +12,17 @@ interface LabelProps {
 type LabelContainerProps = Pick<LabelProps, "variant">;
 
 const LabelContainer = styled.div<LabelContainerProps>`
-  font-family: ${monoFontFamily};
   background-color: ${(props) => palette[props.variant]};
-  padding: 0.25rem;
-  border: 2px solid ${(props) => palette[`dark${props.variant}`]};
   border-radius: 4px;
-  width: fit-content;
-  text-transform: uppercase;
-  font-weight: bold;
+  border: 2px solid ${(props) => palette[`dark${props.variant}`]};
+  color: ${palette.white};
+  font-family: ${monoFontFamily};
   font-size: 12px;
+  font-weight: bold;
+  padding: 0.25rem;
   text-shadow: 1px 1px 0 ${(props) => palette[`dark${props.variant}`]};
+  text-transform: uppercase;
+  width: fit-content;
 `;
 
 export const Label = ({ label, variant }: LabelProps) => (

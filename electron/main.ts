@@ -1,14 +1,12 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain, IpcMainEvent } from "electron";
+import { join } from "path";
+import { Low, JSONFile } from "lowdb";
+import { Store, storeDefaults } from "../src/utilities/store";
 
 let mainWindow: BrowserWindow | null;
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
-
-// const assetsPath =
-//   process.env.NODE_ENV === 'production'
-//     ? process.resourcesPath
-//     : app.getAppPath()
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -32,19 +30,31 @@ function createWindow() {
   });
 }
 
-async function registerListeners() {
-  /**
-   * This comes from bridge integration, check bridge.ts
-   */
-  ipcMain.on("message", (_, message) => {
-    console.log(message);
+async function registerConfig() {
+  const __dirname = app.getPath("userData");
+  const file = join(__dirname, "config.json");
+  const adapter = new JSONFile<Store>(file);
+  const store = new Low(adapter);
+  await store.read();
+
+  store.data ||= storeDefaults;
+  await store.write();
+
+  ipcMain.on("store-get", async (event: IpcMainEvent) => {
+    event.returnValue = store.data;
+  });
+
+  ipcMain.on("store-set", async (event: IpcMainEvent, config: Store) => {
+    store.data = config;
+    await store.write();
+    event.returnValue = "ok";
   });
 }
 
 app
   .on("ready", createWindow)
   .whenReady()
-  .then(registerListeners)
+  .then(registerConfig)
   .catch((e) => console.error(e));
 
 app.on("window-all-closed", () => {

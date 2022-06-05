@@ -1,12 +1,10 @@
-import { Column, Columns, Stack } from "@neurotech/elements";
+import { Column, Columns, JustifyContent, Stack } from "@neurotech/elements";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { monoFontFamily } from "../../styles/GlobalStyles";
-import { palette } from "../../styles/palette";
 import { Button } from "../Button";
 import { Tile } from "../Tile/Tile";
-import { ClipboardIcon } from "./ClipboardIcon";
 import { Status } from "./Status";
+
+export type Generated = "branch" | "pr";
 
 const getIssue = (rawText: string): string => {
   let issue = "";
@@ -25,31 +23,8 @@ const getIssue = (rawText: string): string => {
   return issue;
 };
 
-const ClipboardContents = styled.div<{ isValid: boolean }>`
-  align-items: center;
-  background-color: ${palette.brightgray};
-  border-color: ${(props) =>
-    props.isValid ? palette.green : palette.brightgray};
-  border-radius: 4px;
-  border-style: solid;
-  border-width: 2px;
-  color: #e8e8e9;
-  display: flex;
-  font-size: 1rem;
-  height: 3.5rem;
-  justify-content: flex-start;
-  padding: 0 0.5rem;
-  transition: border-color 0.31s;
-  width: 100%;
-`;
-
-const ClipboardText = styled.div`
-  font-family: ${monoFontFamily};
-  margin-left: 0.5rem;
-`;
-
 export const JiraTools = () => {
-  const [branchName, setBranchName] = useState<string | undefined>("");
+  const [generatedText, setGeneratedText] = useState<string | undefined>("");
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -71,16 +46,14 @@ export const JiraTools = () => {
     }
   }, [clipboardText]);
 
-  const handleGenerate = async () => {
-    const url = `TODO`;
+  const handleGenerate = async (generated: Generated) => {
     setLoading(true);
-
-    const result = await window.Main.fetchUrl(url);
+    const result = await window.Main.generateText(generated, clipboardText);
 
     if (result && result.success && result.data) {
       setSuccess(true);
-      setBranchName(result.data);
-      window.Main.writeToClipbard(result.data);
+      setGeneratedText(result.data);
+      window.Main.writeToClipboard(result.data);
     }
 
     if (result && result.error) {
@@ -94,23 +67,25 @@ export const JiraTools = () => {
     <Tile
       content={
         <Stack padLastChild={false}>
-          <Columns alignItems="stretch">
-            <Column columnWidth="65%">
+          <Columns>
+            <Column>
               <Button
                 disabled={!isValid}
-                label={"Generate branch name from key"}
-                onClick={handleGenerate}
-              ></Button>
+                label={"Generate branch name"}
+                onClick={() => handleGenerate("branch")}
+              />
             </Column>
-            <Column columnWidth="35%">
-              <ClipboardContents isValid={isValid}>
-                <ClipboardIcon isValid={isValid} />
-                <ClipboardText>{clipboardText}</ClipboardText>
-              </ClipboardContents>
+            <Column>
+              <Button
+                disabled={!isValid}
+                label={"Generate PR name"}
+                onClick={() => handleGenerate("pr")}
+              />
             </Column>
           </Columns>
+
           <Status
-            branchName={branchName}
+            clipboardText={clipboardText}
             isError={error}
             isValid={isValid}
             isLoading={loading}
