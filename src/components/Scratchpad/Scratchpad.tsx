@@ -95,7 +95,7 @@ export const Scratchpad = () => {
       title={"Scratchpad"}
       variant={"blue"}
       content={
-        <Stack space={Space.XSmall}>
+        <Stack flexGrow={1} space={Space.XSmall}>
           <Container>
             <LeftColumn>
               <Label label={"Input"} variant={"blue"} />

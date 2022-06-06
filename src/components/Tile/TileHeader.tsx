@@ -56,16 +56,17 @@ const getVariantColours = (variant: TileVariant) => {
 };
 
 const StyledTileHeader = styled.div<{ variant: TileVariant }>`
-  user-select: none;
   background-color: ${(props) =>
     getVariantColours(props.variant).normal.background};
-  border-radius: 4px 4px 0 0;
-  border-width: 2px;
-  border-style: solid;
   border-color: ${(props) => getVariantColours(props.variant).normal.border};
+  border-radius: 4px 4px 0 0;
+  border-style: solid;
+  border-width: 2px;
   color: ${(props) => getVariantColours(props.variant).normal.text};
+  flex-grow: 0;
   font-weight: bold;
   padding: 0;
+  user-select: none;
 
   > * {
     cursor: pointer;

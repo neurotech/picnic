@@ -1,5 +1,6 @@
-import { Column, Columns, Stack } from "@neurotech/elements";
+import { Column, Columns, Stack, themes } from "@neurotech/elements";
 import { useState } from "react";
+import { ThemeProvider } from "styled-components";
 import { ConfigDialog } from "./components/ConfigDialog/ConfigDialog";
 import { HeaderBar } from "./components/HeaderBar/HeaderBar";
 import { JiraTools } from "./components/JiraTools/JiraTools";
@@ -10,7 +11,7 @@ import { GlobalStyles } from "./styles/GlobalStyles";
 export const App = () => {
   const [configDialogOpen, setConfigDialogOpen] = useState<boolean>(false);
   return (
-    <>
+    <ThemeProvider theme={themes.dark}>
       <GlobalStyles />
       <ConfigDialog
         isVisible={configDialogOpen}
@@ -20,7 +21,7 @@ export const App = () => {
         <HeaderBar setConfigDialogOpen={setConfigDialogOpen} />
         <Columns>
           <Column columnWidth="34%">
-            <Stack>
+            <Stack flexGrow={1}>
               <JiraTools />
               <SlackTools />
             </Stack>
@@ -30,6 +31,6 @@ export const App = () => {
           </Column>
         </Columns>
       </Stack>
-    </>
+    </ThemeProvider>
   );
 };

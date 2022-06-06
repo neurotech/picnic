@@ -1,4 +1,12 @@
-import { Column, Columns, JustifyContent, Stack } from "@neurotech/elements";
+import {
+  Button,
+  Column,
+  Columns,
+  Input,
+  JustifyContent,
+  Space,
+  Stack,
+} from "@neurotech/elements";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { palette } from "../../styles/palette";
@@ -8,7 +16,6 @@ import {
   Store,
   storeDefaults,
 } from "../../utilities/store";
-import { Button } from "../Button";
 
 interface ConfigDialogProps {
   isVisible: boolean;
@@ -87,52 +94,74 @@ export const ConfigDialog = ({
         <Dialog>
           <Header>{`Configure`}</Header>
           <Content>
-            <Stack>
-              {`Jira URL: ${configuration.jiraUrl}`}
-              <input
-                type={"text"}
-                onChange={(e) =>
-                  setConfiguration((prevState) => ({
-                    ...prevState,
-                    jiraUrl: e.target.value,
-                  }))
-                }
-                value={configuration.jiraUrl}
-              />
-              {`Jira Username: ${configuration.jiraUsername}`}
-              <input
-                type={"text"}
-                onChange={(e) =>
-                  setConfiguration((prevState) => ({
-                    ...prevState,
-                    jiraUsername: e.target.value,
-                  }))
-                }
-                value={configuration.jiraUsername}
-              />
-              {`Jira Token: ${configuration.jiraToken}`}
-              <input
-                type={"text"}
-                onChange={(e) =>
-                  setConfiguration((prevState) => ({
-                    ...prevState,
-                    jiraToken: e.target.value,
-                  }))
-                }
-                value={configuration.jiraToken}
-              />
-              {`Slack Token: ${configuration.slackToken}`}
-              <input
-                type={"text"}
-                onChange={(e) =>
-                  setConfiguration((prevState) => ({
-                    ...prevState,
-                    slackToken: e.target.value,
-                  }))
-                }
-                value={configuration.slackToken}
-              />
-            </Stack>
+            <Columns space={Space.Medium}>
+              <Column flexGrow={1}>
+                <Stack flexGrow={1}>
+                  <Input
+                    fullWidth
+                    invalid={
+                      !configuration.jiraUrl || configuration.jiraUrl === ""
+                    }
+                    label="Jira URL"
+                    onChange={(e) =>
+                      setConfiguration((prevState) => ({
+                        ...prevState,
+                        jiraUrl: e.target.value,
+                      }))
+                    }
+                    value={configuration.jiraUrl}
+                  />
+                  <Input
+                    fullWidth
+                    invalid={
+                      !configuration.jiraUsername ||
+                      configuration.jiraUsername === ""
+                    }
+                    label="Jira Username"
+                    onChange={(e) =>
+                      setConfiguration((prevState) => ({
+                        ...prevState,
+                        jiraUsername: e.target.value,
+                      }))
+                    }
+                    value={configuration.jiraUsername}
+                  />
+                  <Input
+                    fullWidth
+                    invalid={
+                      !configuration.jiraToken || configuration.jiraToken === ""
+                    }
+                    label={"Jira Token"}
+                    onChange={(e) =>
+                      setConfiguration((prevState) => ({
+                        ...prevState,
+                        jiraToken: e.target.value,
+                      }))
+                    }
+                    value={configuration.jiraToken}
+                  />
+                </Stack>
+              </Column>
+              <Column flexGrow={1}>
+                <Stack flexGrow={1}>
+                  <Input
+                    fullWidth
+                    invalid={
+                      !configuration.slackToken ||
+                      configuration.slackToken === ""
+                    }
+                    label={"Slack Token"}
+                    onChange={(e) =>
+                      setConfiguration((prevState) => ({
+                        ...prevState,
+                        slackToken: e.target.value,
+                      }))
+                    }
+                    value={configuration.slackToken}
+                  />
+                </Stack>
+              </Column>
+            </Columns>
           </Content>
           <Footer>
             <Columns justifyContent={JustifyContent.FlexEnd}>
@@ -141,6 +170,7 @@ export const ConfigDialog = ({
                 <Button
                   label={"Cancel"}
                   onClick={() => setDialogOpen(false)}
+                  variant={"grey"}
                 ></Button>
               </Column>
               <Column>
@@ -152,6 +182,7 @@ export const ConfigDialog = ({
                     setConfiguration(storeDefaults);
                     setDialogOpen(false);
                   }}
+                  variant={"green"}
                 ></Button>
               </Column>
             </Columns>

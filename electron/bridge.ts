@@ -26,11 +26,19 @@ const generateText = (
       branchName = branchName.slice(0, -1);
     }
 
-    return `${prefix}-${branchName}`;
+    return `${prefix}-${branchName}`.toLowerCase();
   }
 
   if (generated === "pr") {
-    return `${type} - ${prefix} - ${issue}`;
+    let prName = "";
+
+    prName = `${prefix} - ${issue}`;
+
+    if (type !== "") {
+      prName = `${type} - ${prName}`;
+    }
+
+    return prName;
   }
 };
 
@@ -41,7 +49,7 @@ export const api = {
   },
 
   readClipboardText: () => clipboard.readText(),
-  writeToClipboard: (text: string) => clipboard.writeText(text),
+  setClipboardText: (text: string) => clipboard.writeText(text),
 
   setSlackStatus: async (statusType: SlackStatusType) => {
     try {
@@ -86,14 +94,16 @@ export const api = {
 
       if (response.body && response.body.issues) {
         const issue = response.body.issues[0];
+        const type =
+          issue.fields.issuetype.name.toLowerCase() === "story" ? "Story" : "";
         const data = generateText(
           generated,
-          issue.fields.issuetype.name,
+          type,
           issue.key,
           issue.fields.summary
         );
 
-        return { success: true, data: data };
+        return { success: true, data };
       }
     } catch (error) {
       console.error(error);

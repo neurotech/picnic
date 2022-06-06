@@ -21,12 +21,17 @@ function createWindow() {
       contextIsolation: true,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
+    show: false,
   });
 
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   mainWindow.on("closed", () => {
     mainWindow = null;
+  });
+
+  mainWindow.once("ready-to-show", () => {
+    mainWindow?.show();
   });
 }
 

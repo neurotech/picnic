@@ -1,4 +1,4 @@
-import { Space, Stack } from "@neurotech/elements";
+import { JustifyContent, Space, Stack } from "@neurotech/elements";
 import { ReactElement, useState } from "react";
 import styled from "styled-components";
 import { palette } from "../../styles/palette";
@@ -18,6 +18,9 @@ const TileBody = styled.div`
   border-top-width: 0;
   border-radius: 0 0 4px 4px;
   color: ${palette.ash};
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   padding: 1rem;
 `;
 
@@ -25,7 +28,12 @@ export const Tile = ({ content, title, variant }: TileProps) => {
   const [open, setOpen] = useState<boolean>(true);
 
   return (
-    <Stack space={Space.None}>
+    <Stack
+      justifyContent={JustifyContent.FlexStart}
+      flexGrow={1}
+      flexShrink={0}
+      space={Space.None}
+    >
       <TileHeader
         opened={open}
         setOpen={setOpen}

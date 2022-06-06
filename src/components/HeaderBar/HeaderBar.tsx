@@ -1,6 +1,5 @@
-import { Column, Columns, JustifyContent } from "@neurotech/elements";
+import { Button, Column, Columns, JustifyContent } from "@neurotech/elements";
 import styled from "styled-components";
-import { Button } from "../Button";
 
 interface HeaderBarProps {
   setConfigDialogOpen: (open: boolean) => void;
@@ -16,6 +15,12 @@ export const HeaderBar = ({ setConfigDialogOpen }: HeaderBarProps) => (
     <Column>
       <Logo>{"Picnic"}</Logo>
     </Column>
-    <Button label={"Configure"} onClick={() => setConfigDialogOpen(true)} />
+    <Column>
+      <Button
+        label={"Configure"}
+        onClick={() => setConfigDialogOpen(true)}
+        variant={"green"}
+      />
+    </Column>
   </Columns>
 );

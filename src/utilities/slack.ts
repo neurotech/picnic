@@ -8,6 +8,10 @@ import {
 } from "./emoji";
 
 export type SlackStatusType =
+  | "idle"
+  | "loading"
+  | "error"
+  | "success"
   | "clear"
   | "brb"
   | "lunch"
