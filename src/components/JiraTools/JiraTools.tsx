@@ -1,8 +1,9 @@
-import { Button, Column, Columns, Stack } from "@neurotech/elements";
+import { Column, Columns, Stack } from "@neurotech/elements";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { monoFontFamily } from "../../styles/GlobalStyles";
 import { palette } from "../../styles/palette";
+import { Button } from "../Button/Button";
 import { Tile } from "../Tile/Tile";
 import { ClipboardIcon } from "./ClipboardIcon";
 import { Status } from "./Status";
@@ -12,12 +13,14 @@ export type Generated = "branch" | "pr";
 const ClipboardContents = styled.div<{ isValid: boolean }>`
   align-items: center;
   background-color: ${(props) =>
-    props.isValid ? palette.darkgreen : palette.brightgray};
-  border-color: ${(props) => (props.isValid ? palette.green : `#636478`)};
+    props.isValid ? palette.green.dim : palette.gray.light};
+  border-color: ${(props) =>
+    props.isValid ? palette.green.light : palette.gray.lighter};
   border-radius: 4px;
   border-style: solid;
-  border-width: 2px;
-  color: ${(props) => (props.isValid ? palette.brightgreen : palette.ash)};
+  border-width: 1px;
+  color: ${(props) =>
+    props.isValid ? palette.green.light : palette.gray.lighter};
   cursor: pointer;
   display: flex;
   font-size: 1rem;
@@ -108,7 +111,7 @@ export const JiraTools = () => {
                 disabled={!isValid}
                 label={"Generate PR name"}
                 onClick={() => handleGenerate("pr")}
-                variant={"blue"}
+                variant={"green"}
               />
             </Column>
             <Column columnWidth={"25%"}>
@@ -134,7 +137,6 @@ export const JiraTools = () => {
         </Stack>
       }
       title={"Jira Tools"}
-      variant={"green"}
     />
   );
 };

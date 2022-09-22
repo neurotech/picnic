@@ -16,12 +16,17 @@ interface SlackStatusProps {
 
 const SlackStatusContainer = styled.div`
   flex: 1;
+  user-select: none;
 `;
 
 const SlackStatusText = styled.div`
+  align-items: center;
+  background-color: ${palette.gray.light};
   border-radius: 6px;
-  background-color: ${palette.brightgray};
-  border: 2px solid #636478;
+  border: 1px solid ${palette.gray.lighter};
+  display: flex;
+  height: 100%;
+  justify-content: center;
   padding: 1rem;
   text-align: center;
 `;

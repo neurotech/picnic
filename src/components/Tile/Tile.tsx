@@ -1,32 +1,38 @@
 import { JustifyContent, Space, Stack } from "@neurotech/elements";
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 import styled from "styled-components";
 import { palette } from "../../styles/palette";
-import { TileHeader } from "./TileHeader";
-
-export type TileVariant = "blue" | "yellow" | "green";
 
 interface TileProps {
   content: ReactElement;
   title: string;
-  variant: TileVariant;
 }
 
+const TileHeader = styled.div`
+  border-bottom: 1px solid ${palette.gray.light};
+  color: ${palette.gray.bright};
+  flex-grow: 0;
+  font-size: 18px;
+  font-weight: normal;
+  margin: 0 0 1rem 0;
+  padding: 0 0 1rem 0;
+  text-shadow: 1px 1px 0 black;
+  user-select: none;
+`;
+
 const TileBody = styled.div`
-  background-color: ${palette.lightgray};
-  border: 2px solid ${palette.darkgray};
-  border-top-width: 0;
-  border-radius: 0 0 4px 4px;
-  color: ${palette.ash};
+  background-color: ${palette.gray.default};
+  border: 1px solid ${palette.gray.light};
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px black;
+  color: ${palette.gray.bright};
   display: flex;
   flex-direction: column;
   flex: 1;
   padding: 1rem;
 `;
 
-export const Tile = ({ content, title, variant }: TileProps) => {
-  const [open, setOpen] = useState<boolean>(true);
-
+export const Tile = ({ content, title }: TileProps) => {
   return (
     <Stack
       justifyContent={JustifyContent.FlexStart}
@@ -34,13 +40,10 @@ export const Tile = ({ content, title, variant }: TileProps) => {
       flexShrink={0}
       space={Space.None}
     >
-      <TileHeader
-        opened={open}
-        setOpen={setOpen}
-        title={title}
-        variant={variant}
-      />
-      {open && <TileBody>{content}</TileBody>}
+      <TileBody>
+        <TileHeader>{title}</TileHeader>
+        {content}
+      </TileBody>
     </Stack>
   );
 };

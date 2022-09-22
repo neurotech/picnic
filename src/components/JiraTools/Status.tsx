@@ -15,13 +15,13 @@ interface StatusProps {
   isSuccess?: boolean;
 }
 
-const StatusContainer = styled.div<StatusProps>`
+const StatusContainer = styled.div`
   align-items: center;
-  background-color: ${palette.brightgray};
-  border-color: ${(props) => (props.isValid ? palette.green : `#636478`)};
+  background-color: ${palette.gray.light};
+  border-color: ${palette.gray.lighter};
   border-radius: 4px;
   border-style: solid;
-  border-width: 2px;
+  border-width: 1px;
   display: flex;
   height: ${HEIGHT};
   padding: ${PADDING};
@@ -62,14 +62,5 @@ export const Status = ({
     setStatusMessage(getStatusMessage());
   }, [isValid, isLoading, isError, isSuccess]);
 
-  return (
-    <StatusContainer
-      isError={isError}
-      isValid={isValid}
-      isLoading={isLoading}
-      isSuccess={isSuccess}
-    >
-      {statusMessage}
-    </StatusContainer>
-  );
+  return <StatusContainer>{statusMessage}</StatusContainer>;
 };

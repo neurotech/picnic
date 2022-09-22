@@ -1,5 +1,4 @@
 import {
-  Button,
   Column,
   Columns,
   JustifyContent,
@@ -10,6 +9,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { language } from "../../utilities/language";
 import { getSlackStatus, SlackStatusType } from "../../utilities/slack";
+import { Button } from "../Button/Button";
 import { Tile } from "../Tile/Tile";
 import { SlackStatus } from "./SlackStatus";
 
@@ -91,20 +91,23 @@ export const SlackTools = () => {
                 <Button
                   emoji="🚪"
                   label="BRB"
+                  minWidth={140}
                   onClick={() => handleStatusClick("brb")}
-                  variant={"green"}
+                  variant={"gray"}
                 />
                 <Button
                   emoji="🍛"
                   label="Lunch"
+                  minWidth={140}
                   onClick={() => handleStatusClick("lunch")}
-                  variant={"green"}
+                  variant={"gray"}
                 />
                 <Button
                   emoji="🌞"
                   label="Sunshine"
+                  minWidth={140}
                   onClick={() => handleStatusClick("sunshine")}
-                  variant={"green"}
+                  variant={"gray"}
                 />
               </Stack>
             </Column>
@@ -113,20 +116,23 @@ export const SlackTools = () => {
                 <Button
                   emoji="👕"
                   label="Laundry"
+                  minWidth={140}
                   onClick={() => handleStatusClick("laundry")}
-                  variant={"green"}
+                  variant={"gray"}
                 />
                 <Button
                   emoji="🍵"
                   label="Tea"
+                  minWidth={140}
                   onClick={() => handleStatusClick("tea")}
-                  variant={"green"}
+                  variant={"gray"}
                 />
                 <Button
                   emoji="🛍️"
                   label="Shopping"
+                  minWidth={140}
                   onClick={() => handleStatusClick("shopping")}
-                  variant={"green"}
+                  variant={"gray"}
                 />
               </Stack>
             </Column>
@@ -152,7 +158,6 @@ export const SlackTools = () => {
         </Stack>
       }
       title={"Slack Tools"}
-      variant={"yellow"}
     />
   );
 };

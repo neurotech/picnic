@@ -19,6 +19,7 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
+      sandbox: false,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
     show: false,

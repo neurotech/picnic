@@ -8,7 +8,8 @@ const generateText = (
   generated: Generated,
   type: string,
   prefix: string,
-  issue: string
+  issue: string,
+  parentIssue?: string
 ) => {
   if (generated === "branch") {
     let branchName = issue
@@ -19,6 +20,7 @@ const generateText = (
       .replace(/</g, "")
       .replace(/\//g, "")
       .replace(/\\/g, "")
+      .replace(/'/g, "")
       .replace(/\./g, "-")
       .replace(/\s/g, "-");
 
@@ -26,7 +28,15 @@ const generateText = (
       branchName = branchName.slice(0, -1);
     }
 
-    return `${prefix}-${branchName}`.toLowerCase();
+    if (parentIssue) {
+      prefix = `${parentIssue}/${prefix}`;
+    }
+
+    if (type.toLowerCase() === "story") {
+      prefix = `story/${prefix}`;
+    }
+
+    return `${prefix}-${branchName.toLowerCase()}`;
   }
 
   if (generated === "pr") {
@@ -78,7 +88,7 @@ export const api = {
   generateText: async (generated: Generated, clipboardText: string) => {
     try {
       const config = await ipcRenderer.sendSync("store-get");
-      const url = `${config.jiraUrl}/rest/api/3/search?jql=key="${clipboardText}"&fields=key,summary,status,issuetype`;
+      const url = `${config.jiraUrl}/rest/api/3/search?jql=key="${clipboardText}"&fields=key,summary,status,issuetype,parent`;
       const username = config.jiraUsername;
       const password = config.jiraToken;
       const authValue = Buffer.from(username + ":" + password).toString(
@@ -94,13 +104,14 @@ export const api = {
 
       if (response.body && response.body.issues) {
         const issue = response.body.issues[0];
-        const type =
-          issue.fields.issuetype.name.toLowerCase() === "story" ? "Story" : "";
+        const parentIssue = issue.fields.parent?.key ?? undefined;
+
         const data = generateText(
           generated,
-          type,
+          issue.fields.issuetype.name,
           issue.key,
-          issue.fields.summary
+          issue.fields.summary,
+          parentIssue
         );
 
         return { success: true, data };

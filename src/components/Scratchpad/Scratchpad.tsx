@@ -14,8 +14,8 @@ const InputArea = styled.input`
   width: 100%;
   height: 100%;
   min-height: ${MIN_HEIGHT};
-  background-color: ${palette.brightgray};
-  border: 2px solid ${palette.darkgray};
+  background-color: ${palette.gray.dark};
+  border: 2px solid ${palette.gray.lighter};
   border-radius: 2px;
   color: #e8e8e9;
   font-size: 2rem;
@@ -23,8 +23,8 @@ const InputArea = styled.input`
   padding: 1rem;
 
   :focus-within {
-    border-color: #5077f3;
-    box-shadow: 0 0 0 3px rgba(80, 118, 243, 0.33);
+    border-color: ${palette.blue.default};
+    box-shadow: 0 0 0 4px ${palette.blue.default}40;
   }
 `;
 
@@ -33,13 +33,15 @@ const OutputArea = styled.div<{ isValid: boolean }>`
   width: 100%;
   height: 100%;
   min-height: ${MIN_HEIGHT};
-  background-color: ${palette.brightgray};
+  background-color: ${(props) =>
+    props.isValid ? palette.green.dim : palette.gray.light};
   border-width: 2px;
   border-style: solid;
   border-color: ${(props) =>
-    props.isValid ? palette.green : palette.brightgray};
+    props.isValid ? palette.green.default : palette.gray.lighter};
   border-radius: 2px;
-  color: #e8e8e9;
+  color: ${(props) =>
+    props.isValid ? palette.green.default : palette.gray.lighter};
   font-size: 2rem;
   padding: 1rem;
   display: flex;
@@ -93,7 +95,6 @@ export const Scratchpad = () => {
   return (
     <Tile
       title={"Scratchpad"}
-      variant={"blue"}
       content={
         <Stack flexGrow={1} space={Space.XSmall}>
           <Container>

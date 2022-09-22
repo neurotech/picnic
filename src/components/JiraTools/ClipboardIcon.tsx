@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { palette } from "../../styles/palette";
 
 const Container = styled.svg<{ isValid: boolean }>`
-  stroke: ${(props) => (props.isValid ? palette.green : "currentColor")};
+  stroke: ${(props) => (props.isValid ? palette.green.light : "currentColor")};
   width: 24px;
   height: 24px;
 `;

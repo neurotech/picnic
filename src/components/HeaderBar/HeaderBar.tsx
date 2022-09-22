@@ -1,25 +1,21 @@
-import { Button, Column, Columns, JustifyContent } from "@neurotech/elements";
-import styled from "styled-components";
+import { Column, Columns, JustifyContent } from "@neurotech/elements";
+import { Button } from "../Button/Button";
+import { Logo } from "./Logo";
 
 interface HeaderBarProps {
   setConfigDialogOpen: (open: boolean) => void;
 }
 
-const Logo = styled.div`
-  font-size: 1.66rem;
-  font-weight: bold;
-`;
-
 export const HeaderBar = ({ setConfigDialogOpen }: HeaderBarProps) => (
   <Columns alignItems={"center"} justifyContent={JustifyContent.SpaceBetween}>
     <Column>
-      <Logo>{"Picnic"}</Logo>
+      <Logo />
     </Column>
     <Column>
       <Button
-        label={"Configure"}
+        label={"⚙️"}
         onClick={() => setConfigDialogOpen(true)}
-        variant={"green"}
+        variant={"gray"}
       />
     </Column>
   </Columns>

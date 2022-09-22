@@ -1,22 +1,65 @@
-export const palette = {
-  ash: "#cdcee7",
-  blue: "#5077f3",
-  brightgray: "#4d4e5f",
-  brightgreen: "#6cffe2",
-  darkblue: "#0a1c4c",
-  darkgray: "#131315",
-  darkgreen: "#004a3b",
-  darkred: "#460012",
-  darkyellow: "#68460b",
-  gray: "#212328",
-  green: "#00b894",
-  lightblue: "#6b8bf5",
-  lightgray: "#32333e",
-  lightgreen: "#19bf9f",
-  lightred: "#ff92ad",
-  lightyellow: "#ffc561",
-  palegreen: "#00b894",
-  red: "#ff386a",
-  white: "#ffffff",
-  yellow: "#ffb83c",
+interface PaletteColor {
+  bright?: string;
+  lighter?: string;
+  light: string;
+  default: string;
+  dark: string;
+  darker?: string;
+  dim?: string;
+}
+
+export const palette: Record<string, PaletteColor> = {
+  blue: {
+    bright: "#b9cbff",
+    lighter: "#9db5ff",
+    light: "#7d9cff",
+    default: "#5c83ff",
+    dark: "#374f99",
+    dim: "#5c83ff1f",
+  },
+  gray: {
+    bright: "#d3d3d4",
+    lighter: "#55585f",
+    light: "#2c2e33",
+    default: "#212328",
+    dark: "#17181c",
+    darker: "#0e0e11",
+  },
+  green: {
+    bright: "#9dffc4",
+    lighter: "#6bffa6",
+    light: "#3aff89",
+    default: "#09ff6b",
+    dark: "#07cc56",
+    dim: "#0560294f",
+  },
+  pink: {
+    lighter: "#ffbef7",
+    light: "#ffa4f3",
+    default: "#ff7dee",
+    dark: "#b358a7",
+    dim: "#ff7dee1a",
+  },
+  purple: {
+    lighter: "#d3c5ff",
+    light: "#c1adff",
+    default: "#a78aff",
+    dark: "#4f3f80",
+    dim: "#a78aff1a",
+  },
+  red: {
+    lighter: "#ff88a6",
+    light: "#ff6088",
+    default: "#ff2058",
+    dark: "#460012",
+    darker: "#2a000b",
+    dim: "#400d196e",
+  },
+  yellow: {
+    lighter: "#ffe3b1",
+    light: "#ffc561",
+    default: "#ffb83c",
+    dark: "#68460b",
+    dim: "#ffb83c33",
+  },
 };

@@ -14,7 +14,8 @@ const FlowLine = styled.line<{ active: boolean }>`
   shape-rendering: geometricprecision;
   stroke-miterlimit: 10;
 
-  stroke: ${(props) => (props.active ? palette.green : palette.brightgray)};
+  stroke: ${(props) =>
+    props.active ? palette.green.default : palette.gray.lighter};
   stroke-width: 2;
   stroke-dashoffset: ${(props) => (props.active ? 100 : 0)};
   stroke-dasharray: ${(props) => (props.active ? 5 : 555)};

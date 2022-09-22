@@ -1,5 +1,4 @@
 import {
-  Button,
   Column,
   Columns,
   Input,
@@ -16,6 +15,8 @@ import {
   Store,
   storeDefaults,
 } from "../../utilities/store";
+import { Button } from "../Button/Button";
+import { Tile } from "../Tile/Tile";
 
 interface ConfigDialogProps {
   isVisible: boolean;
@@ -27,7 +28,7 @@ const ConfigDialogContainer = styled.div<{ isVisible: boolean }>`
 `;
 
 const Backdrop = styled.div`
-  align-items: center;
+  align-items: flex-start;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   height: 100%;
@@ -41,8 +42,6 @@ const Backdrop = styled.div`
 `;
 
 const Dialog = styled.div`
-  background-color: ${palette.lightgray};
-  border: 2px solid ${palette.darkgray};
   border-radius: 0.33rem;
   display: flex;
   flex-direction: column;
@@ -52,20 +51,13 @@ const Dialog = styled.div`
   z-index: 10;
 `;
 
-const Header = styled.div`
-  border-bottom: 2px solid ${palette.darkgray};
-  padding: 1rem;
-  font-size: 1.25rem;
-  font-weight: bold;
-`;
-
 const Content = styled.div`
   flex: 1;
-  padding: 1rem;
+  padding-bottom: 1rem;
 `;
 const Footer = styled.div`
-  border-top: 2px solid ${palette.darkgray};
-  padding: 1rem;
+  border-top: 1px solid ${palette.gray.light};
+  padding-top: 1rem;
 `;
 
 export const ConfigDialog = ({
@@ -91,103 +83,106 @@ export const ConfigDialog = ({
   return (
     <ConfigDialogContainer isVisible={isVisible}>
       <Backdrop>
-        <Dialog>
-          <Header>{`Configure`}</Header>
-          <Content>
-            <Columns space={Space.Medium}>
-              <Column flexGrow={1}>
-                <Stack flexGrow={1}>
-                  <Input
-                    fullWidth
-                    invalid={
-                      !configuration.jiraUrl || configuration.jiraUrl === ""
-                    }
-                    label="Jira URL"
-                    onChange={(e) =>
-                      setConfiguration((prevState) => ({
-                        ...prevState,
-                        jiraUrl: e.target.value,
-                      }))
-                    }
-                    value={configuration.jiraUrl}
-                  />
-                  <Input
-                    fullWidth
-                    invalid={
-                      !configuration.jiraUsername ||
-                      configuration.jiraUsername === ""
-                    }
-                    label="Jira Username"
-                    onChange={(e) =>
-                      setConfiguration((prevState) => ({
-                        ...prevState,
-                        jiraUsername: e.target.value,
-                      }))
-                    }
-                    value={configuration.jiraUsername}
-                  />
-                  <Input
-                    fullWidth
-                    invalid={
-                      !configuration.jiraToken || configuration.jiraToken === ""
-                    }
-                    label={"Jira Token"}
-                    onChange={(e) =>
-                      setConfiguration((prevState) => ({
-                        ...prevState,
-                        jiraToken: e.target.value,
-                      }))
-                    }
-                    value={configuration.jiraToken}
-                  />
-                </Stack>
-              </Column>
-              <Column flexGrow={1}>
-                <Stack flexGrow={1}>
-                  <Input
-                    fullWidth
-                    invalid={
-                      !configuration.slackToken ||
-                      configuration.slackToken === ""
-                    }
-                    label={"Slack Token"}
-                    onChange={(e) =>
-                      setConfiguration((prevState) => ({
-                        ...prevState,
-                        slackToken: e.target.value,
-                      }))
-                    }
-                    value={configuration.slackToken}
-                  />
-                </Stack>
-              </Column>
-            </Columns>
-          </Content>
-          <Footer>
-            <Columns justifyContent={JustifyContent.FlexEnd}>
-              <Column>
-                {" "}
-                <Button
-                  label={"Cancel"}
-                  onClick={() => setDialogOpen(false)}
-                  variant={"grey"}
-                ></Button>
-              </Column>
-              <Column>
-                {" "}
-                <Button
-                  label={"Save"}
-                  onClick={() => {
-                    saveConfigValues();
-                    setConfiguration(storeDefaults);
-                    setDialogOpen(false);
-                  }}
-                  variant={"green"}
-                ></Button>
-              </Column>
-            </Columns>
-          </Footer>
-        </Dialog>
+        <Tile
+          title={"Configure"}
+          content={
+            <Dialog>
+              <Content>
+                <Columns space={Space.Medium}>
+                  <Column flexGrow={1}>
+                    <Stack flexGrow={1}>
+                      <Input
+                        fullWidth
+                        invalid={
+                          !configuration.jiraUrl || configuration.jiraUrl === ""
+                        }
+                        label="Jira URL"
+                        onChange={(e) =>
+                          setConfiguration((prevState) => ({
+                            ...prevState,
+                            jiraUrl: e.target.value,
+                          }))
+                        }
+                        value={configuration.jiraUrl}
+                      />
+                      <Input
+                        fullWidth
+                        invalid={
+                          !configuration.jiraUsername ||
+                          configuration.jiraUsername === ""
+                        }
+                        label="Jira Username"
+                        onChange={(e) =>
+                          setConfiguration((prevState) => ({
+                            ...prevState,
+                            jiraUsername: e.target.value,
+                          }))
+                        }
+                        value={configuration.jiraUsername}
+                      />
+                      <Input
+                        fullWidth
+                        invalid={
+                          !configuration.jiraToken ||
+                          configuration.jiraToken === ""
+                        }
+                        label={"Jira Token"}
+                        onChange={(e) =>
+                          setConfiguration((prevState) => ({
+                            ...prevState,
+                            jiraToken: e.target.value,
+                          }))
+                        }
+                        value={configuration.jiraToken}
+                      />
+                    </Stack>
+                  </Column>
+                  <Column flexGrow={1}>
+                    <Stack flexGrow={1}>
+                      <Input
+                        fullWidth
+                        invalid={
+                          !configuration.slackToken ||
+                          configuration.slackToken === ""
+                        }
+                        label={"Slack Token"}
+                        onChange={(e) =>
+                          setConfiguration((prevState) => ({
+                            ...prevState,
+                            slackToken: e.target.value,
+                          }))
+                        }
+                        value={configuration.slackToken}
+                      />
+                    </Stack>
+                  </Column>
+                </Columns>
+              </Content>
+              <Footer>
+                <Columns justifyContent={JustifyContent.FlexEnd}>
+                  <Column>
+                    <Button
+                      label={"Cancel"}
+                      onClick={() => setDialogOpen(false)}
+                      variant={"gray"}
+                    />
+                  </Column>
+                  <Column>
+                    <Button
+                      label={"Save"}
+                      onClick={() => {
+                        saveConfigValues();
+                        setConfiguration(storeDefaults);
+                        setDialogOpen(false);
+                      }}
+                      variant={"green"}
+                    ></Button>
+                  </Column>
+                </Columns>
+              </Footer>
+            </Dialog>
+          }
+        ></Tile>
       </Backdrop>
     </ConfigDialogContainer>
   );

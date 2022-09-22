@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import { palette } from "./palette";
 
-export const fontFamily = `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`;
+export const fontFamily = `system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`;
 export const monoFontFamily = `ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
     Liberation Mono, monospace`;
 
@@ -18,10 +18,13 @@ export const GlobalStyles = createGlobalStyle`
     width: 100%;
     min-height: 100vh;
     padding: 1rem;
-    background-color: ${palette.gray};
+    background-color: ${palette.gray.dark};
     color: white;
     font-family: ${fontFamily};
-    font-size: 1rem;
     line-height: 1rem;
+  }
+
+    button, input {
+    font-family: ${fontFamily};
   }
 `;

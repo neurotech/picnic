@@ -1,12 +1,25 @@
-import { Column, Columns, Stack, themes } from "@neurotech/elements";
+import { JustifyContent, Stack, themes } from "@neurotech/elements";
 import { useState } from "react";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { ConfigDialog } from "./components/ConfigDialog/ConfigDialog";
 import { HeaderBar } from "./components/HeaderBar/HeaderBar";
 import { JiraTools } from "./components/JiraTools/JiraTools";
 import { Scratchpad } from "./components/Scratchpad/Scratchpad";
 import { SlackTools } from "./components/SlackTools/SlackTools";
 import { GlobalStyles } from "./styles/GlobalStyles";
+
+const ColumnsContainer = styled.div`
+  display: flex;
+`;
+
+const LeftColumn = styled.div`
+  margin-right: 1rem;
+  min-width: 600px;
+`;
+
+const RightColumn = styled.div`
+  flex: 1;
+`;
 
 export const App = () => {
   const [configDialogOpen, setConfigDialogOpen] = useState<boolean>(false);
@@ -19,17 +32,19 @@ export const App = () => {
       />
       <Stack>
         <HeaderBar setConfigDialogOpen={setConfigDialogOpen} />
-        <Columns>
-          <Column columnWidth="34%">
-            <Stack flexGrow={1}>
+
+        <ColumnsContainer>
+          <LeftColumn>
+            <Stack justifyContent={JustifyContent.Stretch}>
               <JiraTools />
               <SlackTools />
             </Stack>
-          </Column>
-          <Column columnWidth="66%">
+          </LeftColumn>
+
+          <RightColumn>
             <Scratchpad />
-          </Column>
-        </Columns>
+          </RightColumn>
+        </ColumnsContainer>
       </Stack>
     </ThemeProvider>
   );
