@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
 
+export type AlertLevel = "success" | "error" | "warning" | "info" | "neutral";
+
 export interface AlertProps {
   alertText: string;
-  level: "success" | "error" | "warning" | "info" | "neutral";
+  level: AlertLevel;
   stretch?: boolean;
 }
 

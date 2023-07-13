@@ -4,14 +4,13 @@ import styled from "@emotion/styled";
 import { Button } from "./Button";
 import { Alert, AlertProps } from "./Alert";
 import { Theme, ThemeProvider } from "@emotion/react";
-import { themes } from "./themes";
-import { GlobalStyles } from "./GlobalStyles";
+import { themes } from "./theme/themes";
+import { GlobalStyles } from "./theme/GlobalStyles";
 import { Stack } from "./layout/Stack";
 import { Store } from "../electron/store";
 import { Columns } from "./layout/Columns";
 import { Column } from "./layout/Column";
 import { Slack } from "./Slack/Slack";
-import { PixelText } from "./PixelText";
 import { Jira } from "./Jira/Jira";
 
 const Container = styled.div`
@@ -43,6 +42,7 @@ export const App = () => {
       <Container>
         <Stack>
           <Button
+            variant="purple"
             buttonText="Toggle Theme"
             onClick={() =>
               setConfig((previousState) => ({
@@ -50,13 +50,12 @@ export const App = () => {
                 darkMode: !previousState.darkMode,
               }))
             }
-            variant="purple"
           />
           <Columns>
-            <Column columnWidth="25%">
+            <Column columnWidth="50%">
               <Jira />
             </Column>
-            <Column>
+            <Column columnWidth="50%">
               <Slack />
             </Column>
           </Columns>

@@ -125,6 +125,21 @@ const dark: Theme = {
     },
   },
   button: darkButtons,
+  separator: "#323438",
+  issues: {
+    base: {
+      background: "#242529",
+      color: palette.grey.main,
+    },
+    hover: {
+      background: "#323438",
+      color: palette.grey.main,
+    },
+    active: {
+      background: palette.ash.main,
+      color: palette.grey.main,
+    },
+  },
 };
 
 const light: Theme = {
@@ -160,6 +175,21 @@ const light: Theme = {
     },
   },
   button: lightButtons,
+  separator: "#939393",
+  issues: {
+    base: {
+      background: palette.grey.light,
+      color: palette.ash.main,
+    },
+    hover: {
+      background: "#323438",
+      color: palette.grey.main,
+    },
+    active: {
+      background: palette.ash.main,
+      color: palette.grey.main,
+    },
+  },
 };
 
 export const themes = { dark, light };

@@ -9,6 +9,7 @@ const StyledStack = styled.div<StackProps>`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  flex: 1;
 
   > :last-child {
     padding-bottom: 0;

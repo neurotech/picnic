@@ -1,9 +1,11 @@
+import { Issue } from "../src/Jira/PreviousIssues/PreviousIssues";
+
 export interface Store {
-  count: number;
   darkMode: boolean;
+  issues: Issue[];
 }
 
 export const defaultStoreValues = {
-  count: 0,
   darkMode: true,
+  issues: [],
 };
