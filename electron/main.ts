@@ -1,50 +1,49 @@
 import { app, BrowserWindow, ipcMain, IpcMainEvent } from "electron";
-import { join } from "path";
-import { Low, JSONFile } from "lowdb";
-import { Store, storeDefaults } from "../src/utilities/store";
+import path from "node:path";
+import { defaultStoreValues, Store } from "./store";
+import { Low } from "lowdb";
+import { JSONFile } from "lowdb/node";
 
-let mainWindow: BrowserWindow | null;
+process.env.DIST = path.join(__dirname, "../dist");
+process.env.PUBLIC = app.isPackaged
+  ? process.env.DIST
+  : path.join(process.env.DIST, "../public");
 
-declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
-declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+let win: BrowserWindow | null;
+const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
 
-function createWindow() {
-  mainWindow = new BrowserWindow({
-    // icon: path.join(assetsPath, 'assets', 'icon.png'),
-    autoHideMenuBar: true,
+const createWindow = () => {
+  if (!process.env.PUBLIC) throw new Error("PUBLIC env var is undefined!");
+
+  win = new BrowserWindow({
     backgroundColor: "#181a20",
+    autoHideMenuBar: true,
     darkTheme: true,
-    width: 1100,
-    height: 700,
     webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: true,
+      preload: path.join(__dirname, "preload.js"),
       sandbox: false,
-      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
-    show: false,
   });
 
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
-
-  mainWindow.on("closed", () => {
-    mainWindow = null;
+  // Test active push message to Renderer-process.
+  win.webContents.on("did-finish-load", () => {
+    win?.webContents.send("main-process-message", new Date().toLocaleString());
   });
 
-  mainWindow.once("ready-to-show", () => {
-    mainWindow?.show();
-  });
-}
+  if (VITE_DEV_SERVER_URL) {
+    win.loadURL(VITE_DEV_SERVER_URL);
+  } else {
+    if (!process.env.DIST) throw new Error("DIST env var is undefined!");
+    win.loadFile(path.join(process.env.DIST, "index.html"));
+  }
+};
 
-async function registerConfig() {
+const registerConfig = async () => {
   const __dirname = app.getPath("userData");
-  const file = join(__dirname, "config.json");
+  const file = path.join(__dirname, "config.json");
   const adapter = new JSONFile<Store>(file);
-  const store = new Low(adapter);
+  const store = new Low(adapter, defaultStoreValues);
   await store.read();
-
-  store.data ||= storeDefaults;
-  await store.write();
 
   ipcMain.on("store-get", async (event: IpcMainEvent) => {
     event.returnValue = store.data;
@@ -55,22 +54,14 @@ async function registerConfig() {
     await store.write();
     event.returnValue = "ok";
   });
-}
+};
+
+app.on("window-all-closed", () => {
+  win = null;
+});
 
 app
   .on("ready", createWindow)
   .whenReady()
   .then(registerConfig)
   .catch((e) => console.error(e));
-
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
-});
-
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
-});
