@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, IpcMainEvent } from "electron";
+import { app, BrowserWindow, ipcMain, IpcMainEvent, screen } from "electron";
 import path from "node:path";
 import { defaultStoreValues, Store } from "./store";
 import { Low } from "lowdb";
@@ -40,6 +40,9 @@ const registerConfig = async () => {
   const store = new Low(adapter, defaultStoreValues);
   await store.read();
 
+  store.data = { ...defaultStoreValues, ...store.data };
+  await store.write();
+
   ipcMain.on("store-get", async (event: IpcMainEvent) => {
     event.returnValue = store.data;
   });
@@ -47,6 +50,23 @@ const registerConfig = async () => {
   ipcMain.on("store-set", async (event: IpcMainEvent, config: Store) => {
     store.data = config;
     await store.write();
+    event.returnValue = "ok";
+  });
+
+  ipcMain.on("resize-window", async (event: IpcMainEvent) => {
+    console.warn("Current bounds: " + JSON.stringify(win?.getBounds()));
+
+    const farMonitor: number = screen
+      .getAllDisplays()
+      .map((display) => display.bounds.x)
+      .sort((a, b) => b - a)[0];
+
+    console.warn(farMonitor);
+
+    win?.unmaximize();
+    win?.setBounds({ x: farMonitor - 8, y: 0, width: 1386, height: 1040 });
+    console.warn(win?.getBounds());
+
     event.returnValue = "ok";
   });
 };

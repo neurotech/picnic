@@ -1,39 +1,47 @@
 import { useState } from "react";
-import { AlertProps, Alert } from "../Alert";
+import { Alert } from "../Alert";
 import { Button } from "../Button";
 import { Card } from "../Card";
 import { Column } from "../layout/Column";
 import { Columns } from "../layout/Columns";
 import { Stack } from "../layout/Stack";
 import { Separator } from "../Separator";
+import {
+  SlackStatusType,
+  getAlertLevel,
+  getSuccessMessage,
+} from "../utilities/slack";
+import { language } from "../utilities/language";
 
 export const Slack = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [status, setStatus] = useState<AlertProps>({
-    level: "neutral",
-    alertText: "Please select a status.",
-  });
+  const [statusText, setStatusText] = useState<string>(
+    language.PleaseSelectAStatus
+  );
+  const [currentStatus, setCurrentStatus] = useState<SlackStatusType>("idle");
 
-  const handleStatus = ({ level, alertText }: AlertProps) => {
+  const handleStatusClick = async (status: SlackStatusType) => {
     setIsLoading(true);
-    setStatus({
-      level: "info",
-      alertText: `Sending status to the Slack API...`,
-    });
+    setCurrentStatus("loading");
+
+    const result = await window.Main.setSlackStatus(status);
+
+    if (result?.success) {
+      setCurrentStatus("success");
+      setStatusText(getSuccessMessage(status));
+    }
+
+    if (result?.error) {
+      setCurrentStatus("error");
+    }
+
+    setIsLoading(false);
 
     setTimeout(() => {
-      setStatus({ level, alertText: `Status set to: ${alertText}!` });
-      setIsLoading(false);
-
-      setTimeout(() => {
-        setStatus({
-          level: "neutral",
-          alertText: "Please select a status.",
-        });
-      }, 1500);
-    }, 1500);
+      setCurrentStatus("idle");
+      setStatusText(language.PleaseSelectAStatus);
+    }, 3000);
   };
-
   return (
     <Card heading={"Slack"}>
       <Stack>
@@ -44,9 +52,7 @@ export const Slack = () => {
                 disabled={isLoading}
                 buttonText="BRB"
                 emoji="🚪"
-                onClick={() =>
-                  handleStatus({ level: "success", alertText: "BRB" })
-                }
+                onClick={() => handleStatusClick("brb")}
                 stretch
                 variant="green"
               />
@@ -54,12 +60,7 @@ export const Slack = () => {
                 disabled={isLoading}
                 buttonText="Lunch"
                 emoji="🍛"
-                onClick={() =>
-                  handleStatus({
-                    level: "success",
-                    alertText: "Lunch",
-                  })
-                }
+                onClick={() => handleStatusClick("lunch")}
                 stretch
                 variant="yellow"
               />
@@ -67,12 +68,7 @@ export const Slack = () => {
                 disabled={isLoading}
                 buttonText="Sunshine"
                 emoji="🌞"
-                onClick={() =>
-                  handleStatus({
-                    level: "success",
-                    alertText: "Sunshine",
-                  })
-                }
+                onClick={() => handleStatusClick("sunshine")}
                 stretch
                 variant="blue"
               />
@@ -84,12 +80,7 @@ export const Slack = () => {
                 disabled={isLoading}
                 buttonText="Laundry"
                 emoji="👕"
-                onClick={() =>
-                  handleStatus({
-                    level: "success",
-                    alertText: "Laundry",
-                  })
-                }
+                onClick={() => handleStatusClick("laundry")}
                 stretch
                 variant="green"
               />
@@ -97,9 +88,7 @@ export const Slack = () => {
                 disabled={isLoading}
                 buttonText="Tea"
                 emoji="🍵"
-                onClick={() =>
-                  handleStatus({ level: "success", alertText: "Tea" })
-                }
+                onClick={() => handleStatusClick("tea")}
                 stretch
                 variant="yellow"
               />
@@ -107,32 +96,26 @@ export const Slack = () => {
                 disabled={isLoading}
                 buttonText="Shopping"
                 emoji="🛍️"
-                onClick={() =>
-                  handleStatus({
-                    level: "success",
-                    alertText: "Shopping",
-                  })
-                }
+                onClick={() => handleStatusClick("shopping")}
                 stretch
                 variant="blue"
               />
             </Stack>
           </Column>
           <Column columnWidth="50%">
-            <Alert alertText={status.alertText} level={status.level} stretch />
+            <Alert
+              alertText={statusText}
+              level={getAlertLevel(currentStatus)}
+              stretch
+            />
           </Column>
         </Columns>
         <Separator />
         <Button
           disabled={isLoading}
-          buttonText="Clear"
-          emoji="❎"
-          onClick={() =>
-            handleStatus({
-              level: "warning",
-              alertText: "Cleared!",
-            })
-          }
+          buttonText="Clear Status"
+          emoji="🧹"
+          onClick={() => handleStatusClick("clear")}
           stretch
           variant="red"
         />

@@ -29,23 +29,32 @@ interface StyledButtonProps {
   size: ButtonSize;
 }
 
-const StyledButton = styled.button<StyledButtonProps>`
-  min-width: ${(props) => (props.minWidth ? props.minWidth : "unset")}px;
+type Sizes = Record<ButtonSize, SizeProperties>;
+interface SizeProperties {
+  fontSize: string;
+  padding: string;
+}
+const buttonSizes: Sizes = {
+  default: { fontSize: "13px", padding: "0.5rem 0.75rem" },
+  small: { fontSize: "11px", padding: "0.1rem 0.5rem" },
+};
 
-  border: none;
-  border-radius: 8px;
+const StyledButton = styled.button<StyledButtonProps>`
+  min-width: ${(props) => (props.minWidth ? `${props.minWidth}px` : "unset")};
+
+  border: 1px solid ${(props) => props.theme.button[props.variant].base.border};
+  border-radius: 4px;
   background: ${(props) => props.theme.button[props.variant].base.background};
 
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-weight: 600;
-  font-size: ${(props) => (props.size === "default" ? "14px" : "12px")};
+  font-size: ${(props) => buttonSizes[props.size].fontSize};
   line-height: 19px;
   color: ${(props) => props.theme.button[props.variant].base.color};
   text-align: center;
 
-  padding: ${(props) =>
-    props.size === "default" ? "0.75rem 1rem" : "0.33rem 0.5rem"};
+  padding: ${(props) => buttonSizes[props.size].padding};
   width: ${(props) => (props.stretch ? "100%" : "unset")};
 
   :hover {
@@ -57,6 +66,7 @@ const StyledButton = styled.button<StyledButtonProps>`
 
   :disabled {
     cursor: not-allowed;
+    border: 1px solid ${(props) => props.theme.button["disabled"].base.border};
     background: ${(props) => props.theme.button["disabled"].base.background};
     color: ${(props) => props.theme.button["disabled"].base.color};
 

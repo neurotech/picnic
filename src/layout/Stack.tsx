@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 
 interface StackProps {
   children: ReactNode | ReactNode[];
+  space?: string;
 }
 
 const StyledStack = styled.div<StackProps>`
@@ -16,14 +17,16 @@ const StyledStack = styled.div<StackProps>`
   }
 `;
 
-const StackChild = styled.div`
-  padding-bottom: 1rem;
+const StackChild = styled.div<Partial<StackProps>>`
+  padding-bottom: ${(props) => props.space ?? "1rem"};
 `;
 
-export const Stack = ({ children }: StackProps) => (
+export const Stack = ({ children, space }: StackProps) => (
   <StyledStack>
     {Children.map(children, (child, index) => (
-      <StackChild key={index}>{child}</StackChild>
+      <StackChild key={index} space={space}>
+        {child}
+      </StackChild>
     ))}
   </StyledStack>
 );

@@ -12,7 +12,10 @@
     "date-fns": "^2.30.0",
     "lowdb": "^6.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tiny-json-http": "^7.5.1",
+    "to-zalgo": "^1.0.1",
+    "vaporwave": "^1.0.4"
   },
   "devDependencies": {
     "@emotion/css": "^11.11.2",
@@ -20,6 +23,7 @@
     "@emotion/styled": "^11.11.0",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
+    "@types/tiny-json-http": "^7.3.1",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
     "@vitejs/plugin-react": "^4.0.1",

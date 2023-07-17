@@ -3,9 +3,13 @@ import { palette } from "../../theme/palette";
 import { Issue } from "./Issue";
 import { useState } from "react";
 import { keyframes } from "@emotion/react";
+import { Stack } from "../../layout/Stack";
+import { Button } from "../../Button";
 
 interface PreviousIssuesProps {
   issues: Issue[];
+  setIssues: (issues: Issue[]) => void;
+  validIssue: string | undefined;
 }
 
 export interface Issue {
@@ -20,14 +24,14 @@ interface CopiedProps {
 
 const IssuesContainer = styled.div``;
 
-const IssuesHeading = styled.div`
+const IssuesHeader = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
 `;
-const IssuesHeadingText = styled.div`
+const IssuesHeaderText = styled.div`
   color: ${palette.white.main};
-  background-color: ${palette.purple.main};
+  background-color: ${palette.blue.main};
   width: fit-content;
   padding: 0.25rem 0.5rem;
   border-radius: 3px 3px 0 0;
@@ -60,11 +64,22 @@ const Copied = styled.div<CopiedProps>`
 `;
 
 const IssuesBody = styled.div`
-  border: 2px solid ${palette.purple.main};
+  border: 2px solid ${palette.blue.main};
   border-radius: 0 3px 3px 3px;
   display: flex;
   flex-direction: column;
 `;
+
+const IssuesFooter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+const IssuesFooterText = styled.div`
+  width: fit-content;
+  padding: 0.15rem 0 0 0;
+`;
+
 const NoIssuesFound = styled.div`
   user-select: none;
   padding: 0.25rem 0.5rem;
@@ -73,30 +88,54 @@ const NoIssuesFound = styled.div`
   flex: 1;
 `;
 
-export const PreviousIssues = ({ issues }: PreviousIssuesProps) => {
+export const PreviousIssues = ({
+  issues,
+  setIssues,
+  validIssue,
+}: PreviousIssuesProps) => {
   const [copied, setCopied] = useState<boolean>(false);
+  const sortedIssues = issues.sort((a, b) => {
+    return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+  });
 
   return (
     <IssuesContainer>
-      <IssuesHeading>
-        <IssuesHeadingText>{"Previous Issues"}</IssuesHeadingText>
+      <IssuesHeader>
+        <IssuesHeaderText>{"Previous Issues"}</IssuesHeaderText>
         {copied && <Copied copied={copied}>{"Copied!"}</Copied>}
-      </IssuesHeading>
+      </IssuesHeader>
       <IssuesBody>
         {!issues.length ? (
           <NoIssuesFound>{"No issues found."}</NoIssuesFound>
         ) : (
-          issues.map((issue, index) => (
-            <Issue
-              key={index}
-              issueKey={issue.key}
-              issueText={issue.text}
-              issueTimestamp={issue.timestamp}
-              setCopied={setCopied}
-            />
-          ))
+          <Stack space="0">
+            {sortedIssues.map((issue, index) => (
+              <Issue
+                key={index}
+                issueKey={issue.key}
+                issueText={issue.text}
+                issueTimestamp={issue.timestamp}
+                setCopied={setCopied}
+                isLast={index === sortedIssues.length - 1}
+                selected={issue.key === validIssue?.toUpperCase()}
+              />
+            ))}
+          </Stack>
         )}
       </IssuesBody>
+      {issues.length > 0 && (
+        <IssuesFooter>
+          <IssuesFooterText>
+            <Button
+              size="small"
+              minWidth={10}
+              buttonText="Clear"
+              variant="red"
+              onClick={() => setIssues([])}
+            />
+          </IssuesFooterText>
+        </IssuesFooter>
+      )}
     </IssuesContainer>
   );
 };

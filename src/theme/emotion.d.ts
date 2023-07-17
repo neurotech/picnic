@@ -1,21 +1,22 @@
 import "@emotion/react";
 import { ButtonVariant } from "../Button";
+import { StatusVariant } from "../Status";
 
-interface BaseColours {
+export interface BaseColours {
   background: string;
   color: string;
+  border?: string;
+  placeholder?: string;
+  boxShadow?: string;
 }
 
 type Buttons = Record<ButtonVariant, ButtonStates>;
 
-interface ButtonStates {
-  base: ButtonTheme;
-  hover: ButtonTheme;
-}
+type Statuses = Record<StatusVariant, BaseColours>;
 
-interface ButtonTheme {
-  background: string;
-  color: string;
+interface ButtonStates {
+  base: BaseColours;
+  hover: BaseColours;
 }
 
 interface AlertTheme {
@@ -23,10 +24,16 @@ interface AlertTheme {
   color: string;
 }
 
+interface InputStates {
+  base: BaseColours;
+  active: BaseColours;
+}
+
 interface IssuesTheme {
   base: BaseColours;
   hover: BaseColours;
   active: BaseColours;
+  selected: BaseColours;
 }
 
 declare module "@emotion/react" {
@@ -50,5 +57,7 @@ declare module "@emotion/react" {
     button: Buttons;
     separator: string;
     issues: IssuesTheme;
+    status: Statuses;
+    input: InputStates;
   }
 }

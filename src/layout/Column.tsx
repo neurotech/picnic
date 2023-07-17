@@ -17,17 +17,7 @@ const StyledColumn = styled.div<ColumnProps>`
   flex-shrink: ${(props) => props.flexShrink};
   min-width: 0;
   padding-left: ${(props) => props.space};
-
-  @media (max-width: 576px) {
-    width: 100%;
-    padding-bottom: ${(props) => props.space};
-  }
-  @media (min-width: 992px) {
-    width: ${(props) => props.columnWidth};
-  }
-  @media (min-width: 1200px) {
-    width: ${(props) => props.columnWidth};
-  }
+  width: ${(props) => (props.columnWidth ? props.columnWidth : "unset")};
 `;
 
 export const Column = ({
