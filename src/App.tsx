@@ -71,20 +71,6 @@ export const App = () => {
                   onClick={() => window.Main.resizeWindow()}
                 />
               </Column>
-              <Column>
-                <Button
-                  variant="green"
-                  buttonText="Test Reaction"
-                  onClick={async () => {
-                    const response = await window.Main.sendSlackReaction(
-                      "GTMAS1W93",
-                      "lemon",
-                      "1689551795.320299"
-                    );
-                    console.warn(response);
-                  }}
-                />
-              </Column>
             </Columns>
           </Card>
         </Stack>
