@@ -41,7 +41,9 @@ const VaporwaveOutput = styled.div<{ active: boolean }>`
   text-align: center;
   align-self: center;
   padding: 1rem;
-  border: 2px solid rgba(0, 0, 0, 0.12);
+  border: 2px solid
+    ${(props) =>
+      props.active ? "rgba(0, 0, 0, 0.12)" : props.theme.input.base.border};
   border-radius: 4px;
 
   color: ${palette.white.main};
