@@ -54,18 +54,13 @@ const registerConfig = async () => {
   });
 
   ipcMain.on("resize-window", async (event: IpcMainEvent) => {
-    console.warn("Current bounds: " + JSON.stringify(win?.getBounds()));
-
     const farMonitor: number = screen
       .getAllDisplays()
       .map((display) => display.bounds.x)
       .sort((a, b) => b - a)[0];
 
-    console.warn(farMonitor);
-
     win?.unmaximize();
     win?.setBounds({ x: farMonitor - 8, y: 0, width: 1386, height: 1040 });
-    console.warn(win?.getBounds());
 
     event.returnValue = "ok";
   });
