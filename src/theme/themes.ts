@@ -275,7 +275,7 @@ const light: Theme = {
   status,
   input: {
     base: {
-      background: palette.white.main,
+      background: palette.snow.main,
       color: palette.ash.dark,
       border: palette.grey.main,
       placeholder: palette.ash.light,
