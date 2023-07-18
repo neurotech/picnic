@@ -6,7 +6,10 @@
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run"
   },
   "dependencies": {
     "date-fns": "^2.30.0",
@@ -27,6 +30,7 @@
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
     "@vitejs/plugin-react": "^4.0.1",
+    "@vitest/ui": "^0.33.0",
     "electron": "^25.2.0",
     "electron-builder": "^24.4.0",
     "eslint": "^8.44.0",
@@ -35,7 +39,8 @@
     "typescript": "^5.1.6",
     "vite": "^4.3.9",
     "vite-plugin-electron": "^0.12.0",
-    "vite-plugin-electron-renderer": "^0.14.5"
+    "vite-plugin-electron-renderer": "^0.14.5",
+    "vitest": "^0.33.0"
   },
   "main": "dist-electron/main.js"
 }
