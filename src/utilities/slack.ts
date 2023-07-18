@@ -3,6 +3,8 @@ import {
   brbEmoji,
   foodEmoji,
   laundryEmoji,
+  letterEmoji,
+  phocasLetterEmoji,
   shoppingEmoji,
   sunshineEmoji,
   teaEmoji,
@@ -180,4 +182,69 @@ export const getAlertLevel = (status: SlackStatusType): AlertLevel => {
     default:
       return "neutral";
   }
+};
+
+export interface SlackDetails {
+  channel: string;
+  timestamp: string;
+  unixTimestamp: string;
+}
+
+export const parseInputForSlackDetails = (
+  input: string
+): SlackDetails | undefined => {
+  try {
+    if (!input.toLowerCase().startsWith("http")) return;
+
+    const inputAsUrl = new URL(input);
+    const elements = inputAsUrl.pathname.split("/").slice(1);
+    const channel = elements[1];
+    const baseTimestamp = elements[2].substring(1);
+    const unixTimestamp = baseTimestamp.substring(0, baseTimestamp.length - 3);
+    const timestampElements = baseTimestamp.split("");
+    timestampElements.splice(timestampElements.length - 6, 0, ".");
+
+    const timestamp = timestampElements.join("");
+
+    return { channel, timestamp, unixTimestamp };
+  } catch (error) {
+    return undefined;
+  }
+};
+
+export const getEmojiListForInput = (input: string): string[] | undefined => {
+  const inputNoSpaces = input.replace(" ", "");
+
+  if (!/^[A-Za-z]+$/.test(inputNoSpaces)) return;
+
+  const emojiList: string[] = [];
+  const registry: Record<string, string[]> = {};
+
+  try {
+    inputNoSpaces.split("").forEach((char) => {
+      const letterIsInRegistry = Object.keys(registry).find(
+        (letter) => letter === char
+      );
+
+      if (letterIsInRegistry) {
+        const registryEntry = registry[letterIsInRegistry];
+
+        if (registryEntry.length === 1) {
+          emojiList.push(phocasLetterEmoji[char]);
+          registry[char] = [...registry[char], phocasLetterEmoji[char]];
+        }
+
+        if (registryEntry.length === 2) {
+          throw new Error("No letters left!");
+        }
+      } else {
+        emojiList.push(letterEmoji[char]);
+        registry[char] = [letterEmoji[char]];
+      }
+    });
+  } catch (error) {
+    return;
+  }
+
+  return emojiList;
 };

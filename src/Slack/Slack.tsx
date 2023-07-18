@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert } from "../Alert";
 import { Button } from "../Button";
 import { Card } from "../Card";
@@ -7,11 +7,14 @@ import { Columns } from "../layout/Columns";
 import { Stack } from "../layout/Stack";
 import { Separator } from "../Separator";
 import {
+  SlackDetails,
   SlackStatusType,
   getAlertLevel,
   getSuccessMessage,
+  parseInputForSlackDetails,
 } from "../utilities/slack";
 import { language } from "../utilities/language";
+import { Reaction } from "./Reaction";
 
 export const Slack = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,6 +22,19 @@ export const Slack = () => {
     language.PleaseSelectAStatus
   );
   const [currentStatus, setCurrentStatus] = useState<SlackStatusType>("idle");
+  const [slackDetails, setSlackDetails] = useState<SlackDetails | undefined>();
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const output = parseInputForSlackDetails(window.Main.readClipboardText());
+      if (output) {
+        setSlackDetails(output);
+      } else {
+        setSlackDetails(undefined);
+      }
+    }, 1500);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleStatusClick = async (status: SlackStatusType) => {
     setIsLoading(true);
@@ -110,7 +126,6 @@ export const Slack = () => {
             />
           </Column>
         </Columns>
-        <Separator />
         <Button
           disabled={isLoading}
           buttonText="Clear Status"
@@ -119,6 +134,8 @@ export const Slack = () => {
           stretch
           variant="red"
         />
+        <Separator />
+        <Reaction slackDetails={slackDetails} />
       </Stack>
     </Card>
   );
