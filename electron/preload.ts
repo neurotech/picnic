@@ -4,6 +4,40 @@ import { Store } from "./store";
 import { GeneratedText, RequestType } from "../src/Jira/Jira";
 import { SlackStatusType, getSlackStatus } from "../src/utilities/slack";
 
+interface Result {
+  body: any;
+  headers: any;
+}
+
+interface Task {
+  url: string;
+  data: {
+    channel: string;
+    name: string;
+    timestamp: string;
+  };
+  headers: {
+    Authorization: string;
+  };
+}
+
+const runInSequence = (tasks: Task[]) => {
+  if (tasks.length > 0) {
+    const { url, data, headers } = tasks[0];
+
+    tiny.post({ url, data, headers }, function _get(err, result) {
+      if (err) {
+        return console.error(err);
+      }
+
+      setTimeout(() => {
+        tasks.shift();
+        if (tasks.length > 0) runInSequence(tasks);
+      }, 350);
+    });
+  }
+};
+
 const generateText = (
   requestType: RequestType,
   type: string,
@@ -103,27 +137,23 @@ export const api = {
 
   sendSlackReaction: async (
     channel: string,
-    emojiName: string,
-    timestamp: string
+    timestamp: string,
+    emojiList: string[]
   ) => {
     const config = await ipcRenderer.sendSync("store-get");
     const url = `https://slack.com/api/reactions.add`;
     const authValue = config.slackToken;
-    const data = {
-      channel: channel,
-      name: emojiName,
-      timestamp: timestamp,
+    const headers = {
+      Authorization: `Bearer ${authValue}`,
     };
 
-    console.warn(url);
-
-    return tiny.post({
+    const tasks = emojiList.map((name) => ({
       url,
-      data,
-      headers: {
-        Authorization: `Bearer ${authValue}`,
-      },
-    });
+      data: { channel, name, timestamp },
+      headers,
+    }));
+
+    runInSequence(tasks);
   },
 
   generateText: async (requestType: RequestType, clipboardText: string) => {
