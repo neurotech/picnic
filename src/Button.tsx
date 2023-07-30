@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { ReactNode } from "react";
 
 export type ButtonVariant =
   | "blue"
@@ -13,7 +14,7 @@ type ButtonSize = "default" | "small";
 interface ButtonProps {
   buttonText: string;
   disabled?: boolean;
-  emoji?: string;
+  icon?: string | ReactNode;
   minWidth?: number;
   onClick?: () => void;
   stretch?: boolean;
@@ -52,16 +53,30 @@ const StyledButton = styled.button<StyledButtonProps>`
   font-size: ${(props) => buttonSizes[props.size].fontSize};
   line-height: 19px;
   color: ${(props) => props.theme.button[props.variant].base.color};
+  text-shadow: 0 1px 0
+    ${(props) => props.theme.button[props.variant].base.textShadow};
   text-align: center;
 
   padding: ${(props) => buttonSizes[props.size].padding};
   width: ${(props) => (props.stretch ? "100%" : "unset")};
+
+  span {
+    filter: ${(props) =>
+      `drop-shadow(0 1px 0px ${
+        props.theme.button[props.variant ?? "blue"].base.dropShadow
+      })`};
+  }
 
   :hover {
     cursor: pointer;
     background: ${(props) =>
       props.theme.button[props.variant].hover.background};
     color: ${(props) => props.theme.button[props.variant].hover.color};
+    text-shadow: none;
+
+    span {
+      filter: none;
+    }
   }
 
   :disabled {
@@ -69,31 +84,32 @@ const StyledButton = styled.button<StyledButtonProps>`
     border: 1px solid ${(props) => props.theme.button["disabled"].base.border};
     background: ${(props) => props.theme.button["disabled"].base.background};
     color: ${(props) => props.theme.button["disabled"].base.color};
+    text-shadow: none;
 
     :hover,
     :active {
       background: ${(props) => props.theme.button["disabled"].base.background};
       color: ${(props) => props.theme.button["disabled"].base.color};
+      text-shadow: none;
     }
   }
 
   transition: all 0.12s;
 `;
 
-const ButtonLabel = styled.div<Pick<ButtonProps, "emoji">>`
+const ButtonLabel = styled.div<Pick<ButtonProps, "icon">>`
   display: flex;
-  justify-content: ${(props) => (props.emoji ? "space-between" : "center")};
+  justify-content: ${(props) => (props.icon ? "space-between" : "center")};
 `;
 
-const Emoji = styled.span<Pick<ButtonProps, "disabled">>`
-  text-shadow: none;
-  filter: ${(props) => (props.disabled ? "grayscale(1)" : "none")};
+const Emoji = styled.span<Pick<ButtonProps, "disabled" | "variant">>`
+  align-self: center;
 `;
 
 export const Button = ({
   buttonText,
   disabled = false,
-  emoji,
+  icon: emoji,
   minWidth = emoji ? 130 : 90,
   onClick,
   stretch = false,
@@ -108,9 +124,11 @@ export const Button = ({
     variant={variant}
     size={size}
   >
-    <ButtonLabel emoji={emoji}>
-      <span>{buttonText}</span>
-      <Emoji disabled={disabled}>{emoji}</Emoji>
+    <ButtonLabel icon={emoji}>
+      <div>{buttonText}</div>
+      <Emoji disabled={disabled} variant={variant}>
+        {emoji}
+      </Emoji>
     </ButtonLabel>
   </StyledButton>
 );
