@@ -4,11 +4,6 @@ import { Store } from "./store";
 import { GeneratedText, RequestType } from "../src/Jira/Jira";
 import { SlackStatusType, getSlackStatus } from "../src/utilities/slack";
 
-interface Result {
-  body: any;
-  headers: any;
-}
-
 interface Task {
   url: string;
   data: {
@@ -25,7 +20,7 @@ const runInSequence = (tasks: Task[]) => {
   if (tasks.length > 0) {
     const { url, data, headers } = tasks[0];
 
-    tiny.post({ url, data, headers }, function _get(err, result) {
+    tiny.post({ url, data, headers }, function _get(err) {
       if (err) {
         return console.error(err);
       }
