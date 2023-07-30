@@ -9,6 +9,9 @@ const parseInputForSlackDetailsCases = [
     input: "http://hackz.net",
   },
   {
+    input: "https://github.com/org/repo/pull/999",
+  },
+  {
     input:
       "https://phocassoftware.slack.com/archives/GTMAS1W93/p1689551795320299?thread_ts=1688610203.817309&cid=GTMAS1W93",
     expectedValue: {

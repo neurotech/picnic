@@ -197,6 +197,9 @@ export const parseInputForSlackDetails = (
     if (!input.toLowerCase().startsWith("http")) return;
 
     const inputAsUrl = new URL(input);
+
+    if (!inputAsUrl.host.includes(".slack.com")) return;
+
     const elements = inputAsUrl.pathname.split("/").slice(1);
     const channel = elements[1];
     const baseTimestamp = elements[2].substring(1);
