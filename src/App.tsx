@@ -12,6 +12,10 @@ import { Slack } from "./Slack/Slack";
 import { Jira } from "./Jira/Jira";
 import { TextHelpers } from "./TextHelpers/TextHelpers";
 import { Card } from "./Card";
+import { ConfigDialog } from "./ConfigDialog";
+import { Reaction } from "./Slack/Reaction";
+import { SlackDetails, parseInputForSlackDetails } from "./utilities/slack";
+import { AllSidesIcon, GearIcon, MoonIcon } from "@radix-ui/react-icons";
 
 const Container = styled.div`
   padding: 1rem;
@@ -22,10 +26,24 @@ const Container = styled.div`
 `;
 
 export const App = () => {
+  const [configOpen, setConfigOpen] = useState<boolean>(false);
   const [config, setConfig] = useState<Store>(window.Main.store.get());
+  const [slackDetails, setSlackDetails] = useState<SlackDetails | undefined>();
   const [theme, setTheme] = useState<Theme>(
     themes[config?.darkMode ? "dark" : "light"]
   );
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const output = parseInputForSlackDetails(window.Main.readClipboardText());
+      if (output) {
+        setSlackDetails(output);
+      } else {
+        setSlackDetails(undefined);
+      }
+    }, 1500);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     setConfig(window.Main.store.get());
@@ -39,6 +57,7 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles theme={theme} />
+      <ConfigDialog open={configOpen} />
       <Container>
         <Stack>
           <Columns>
@@ -49,26 +68,48 @@ export const App = () => {
               <Slack />
             </Column>
           </Columns>
-          <TextHelpers />
+
+          <Columns>
+            <Column columnWidth="55%">
+              <TextHelpers />
+            </Column>
+            <Column flexGrow={1}>
+              <Reaction slackDetails={slackDetails} />
+            </Column>
+          </Columns>
+
           <Card heading="Tools">
-            <Columns>
-              <Column>
+            <Columns space="0.5rem" justifyContent="space-between">
+              <Column columnWidth="33%">
                 <Button
                   variant="purple"
                   buttonText="Toggle Theme"
+                  icon={<MoonIcon />}
                   onClick={() =>
                     setConfig((previousState) => ({
                       ...previousState,
                       darkMode: !previousState.darkMode,
                     }))
                   }
+                  stretch
                 />
               </Column>
-              <Column>
+              <Column columnWidth="33%">
                 <Button
                   variant="red"
                   buttonText="Resize Window"
+                  icon={<AllSidesIcon />}
                   onClick={() => window.Main.resizeWindow()}
+                  stretch
+                />
+              </Column>
+              <Column columnWidth="33%">
+                <Button
+                  variant="green"
+                  buttonText="Open Config"
+                  icon={<GearIcon />}
+                  onClick={() => setConfigOpen(true)}
+                  stretch
                 />
               </Column>
             </Columns>
