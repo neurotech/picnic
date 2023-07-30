@@ -5,7 +5,6 @@ import { Button } from "../Button";
 import { Stack } from "../layout/Stack";
 import { useState, useEffect } from "react";
 import { Issue, PreviousIssues } from "./PreviousIssues/PreviousIssues";
-import { Separator } from "../Separator";
 import { Alert, AlertLevel } from "../Alert";
 import { language } from "../utilities/language";
 
@@ -139,7 +138,6 @@ export const Jira = () => {
             />
           </Column>
         </Columns>
-        <Separator />
         <PreviousIssues
           setIssues={setIssues}
           validIssue={validIssue}

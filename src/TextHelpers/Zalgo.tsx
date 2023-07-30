@@ -190,9 +190,11 @@ const ZalgoOutput = styled.div<{ active: boolean }>`
   border-radius: 4px;
 
   background-color: ${palette.black.main};
+
   color: red;
-  font-size: 20px;
+  font-size: 22px;
   line-height: 30px;
+  font-family: "Times New Roman", Times, serif;
 
   filter: ${(props) => (props.active ? "unset" : "grayscale(1)")};
 `;

@@ -14,7 +14,7 @@ interface IssueProps {
   selected: boolean;
 }
 
-const truncate = (string = "", maxLength = 75) =>
+const truncate = (string = "", maxLength = 70) =>
   string.length > maxLength ? `${string.substring(0, maxLength)}…` : string;
 
 const IssueContainer = styled.div<{ selected: boolean; isLast: boolean }>`
@@ -108,7 +108,7 @@ export const Issue = ({
       <Columns justifyContent="space-between">
         <Column>
           <Columns>
-            <Column flexGrow={0} flexShrink={0} columnWidth="70px">
+            <Column flexGrow={0} flexShrink={0} columnWidth="80px">
               <IssueKey>
                 <Status variant={"indigo"} statusText={issueKey} />
               </IssueKey>
@@ -120,7 +120,7 @@ export const Issue = ({
             </Column>
           </Columns>
         </Column>
-        <Column flexGrow={0} flexShrink={0} columnWidth="140px">
+        <Column flexGrow={0} flexShrink={0} columnWidth="155px">
           <IssueTimestamp>{formattedTimestamp}</IssueTimestamp>
         </Column>
       </Columns>
