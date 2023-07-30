@@ -8,6 +8,8 @@ export interface BaseColours {
   border?: string;
   placeholder?: string;
   boxShadow?: string;
+  textShadow?: string;
+  dropShadow?: string;
 }
 
 type Buttons = Record<ButtonVariant, ButtonStates>;

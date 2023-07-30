@@ -6,56 +6,66 @@ const darkButtons: Buttons = {
   blue: {
     base: {
       background: palette.blue.main,
-      color: palette.blue.dark,
+      color: palette.white.main,
       border: `${palette.blue.dark}ed`,
+      textShadow: `${palette.blue.dark}80`,
+      dropShadow: `${palette.blue.dark}80`,
     },
     hover: {
       background: palette.blue.light,
-      color: palette.white.main,
+      color: palette.blue.dark,
     },
   },
   red: {
     base: {
       background: palette.red.main,
-      color: palette.red.dark,
+      color: palette.white.main,
       border: `${palette.red.dark}ed`,
+      textShadow: `${palette.red.dark}80`,
+      dropShadow: `${palette.red.dark}80`,
     },
     hover: {
       background: palette.red.light,
-      color: palette.white.main,
+      color: palette.red.dark,
     },
   },
   purple: {
     base: {
       background: palette.purple.main,
-      color: palette.purple.dark,
+      color: palette.white.main,
       border: `${palette.purple.dark}ed`,
+      textShadow: `${palette.purple.dark}80`,
+      dropShadow: `${palette.purple.dark}80`,
     },
     hover: {
       background: palette.purple.light,
-      color: palette.white.main,
+      color: palette.purple.dark,
     },
   },
   green: {
     base: {
       background: palette.green.main,
-      color: palette.green.dark,
+      color: palette.white.main,
       border: `${palette.green.dark}ed`,
+      textShadow: `${palette.green.dark}80`,
+      dropShadow: `${palette.green.dark}80`,
     },
     hover: {
       background: palette.green.light,
-      color: palette.white.main,
+      color: palette.green.dark,
     },
   },
   yellow: {
     base: {
       background: palette.yellow.main,
-      color: palette.yellow.dark,
+      color: palette.white.main,
       border: `${palette.yellow.dark}ed`,
+      textShadow: `${palette.yellow.dark}90`,
+      dropShadow: `${palette.yellow.dark}90`,
     },
     hover: {
       background: palette.yellow.light,
-      color: palette.white.main,
+      color: palette.yellow.dark,
     },
   },
   disabled: {
@@ -74,6 +84,8 @@ const lightButtons: Buttons = {
       background: palette.blue.main,
       color: palette.white.main,
       border: `${palette.blue.dark}60`,
+      textShadow: `${palette.blue.dark}80`,
+      dropShadow: `${palette.blue.dark}80`,
     },
     hover: {
       background: palette.blue.light,
@@ -85,6 +97,8 @@ const lightButtons: Buttons = {
       background: palette.red.main,
       color: palette.white.main,
       border: `${palette.red.dark}60`,
+      textShadow: `${palette.red.dark}80`,
+      dropShadow: `${palette.red.dark}80`,
     },
     hover: {
       background: palette.red.light,
@@ -96,6 +110,8 @@ const lightButtons: Buttons = {
       background: palette.purple.main,
       color: palette.white.main,
       border: `${palette.purple.dark}60`,
+      textShadow: `${palette.purple.dark}80`,
+      dropShadow: `${palette.purple.dark}80`,
     },
     hover: {
       background: palette.purple.light,
@@ -107,6 +123,8 @@ const lightButtons: Buttons = {
       background: palette.green.main,
       color: palette.white.main,
       border: `${palette.green.dark}60`,
+      textShadow: `${palette.green.dark}80`,
+      dropShadow: `${palette.green.dark}80`,
     },
     hover: {
       background: palette.green.light,
@@ -118,6 +136,8 @@ const lightButtons: Buttons = {
       background: palette.yellow.main,
       color: palette.white.main,
       border: `${palette.yellow.dark}60`,
+      textShadow: `${palette.yellow.dark}80`,
+      dropShadow: `${palette.yellow.dark}80`,
     },
     hover: {
       background: palette.yellow.light,
