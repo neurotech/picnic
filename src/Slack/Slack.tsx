@@ -1,20 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Alert } from "../Alert";
 import { Button } from "../Button";
 import { Card } from "../Card";
 import { Column } from "../layout/Column";
 import { Columns } from "../layout/Columns";
 import { Stack } from "../layout/Stack";
-import { Separator } from "../Separator";
 import {
-  SlackDetails,
   SlackStatusType,
   getAlertLevel,
   getSuccessMessage,
-  parseInputForSlackDetails,
 } from "../utilities/slack";
 import { language } from "../utilities/language";
-import { Reaction } from "./Reaction";
+import {
+  CookieIcon,
+  CrossCircledIcon,
+  LinkBreak2Icon,
+  MagicWandIcon,
+  SunIcon,
+} from "@radix-ui/react-icons";
 
 export const Slack = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -22,19 +25,6 @@ export const Slack = () => {
     language.PleaseSelectAStatus
   );
   const [currentStatus, setCurrentStatus] = useState<SlackStatusType>("idle");
-  const [slackDetails, setSlackDetails] = useState<SlackDetails | undefined>();
-
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      const output = parseInputForSlackDetails(window.Main.readClipboardText());
-      if (output) {
-        setSlackDetails(output);
-      } else {
-        setSlackDetails(undefined);
-      }
-    }, 1500);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleStatusClick = async (status: SlackStatusType) => {
     setIsLoading(true);
@@ -58,6 +48,7 @@ export const Slack = () => {
       setStatusText(language.PleaseSelectAStatus);
     }, 3000);
   };
+
   return (
     <Card heading={"Slack"}>
       <Stack>
@@ -67,7 +58,7 @@ export const Slack = () => {
               <Button
                 disabled={isLoading}
                 buttonText="BRB"
-                emoji="🚪"
+                icon={<LinkBreak2Icon />}
                 onClick={() => handleStatusClick("brb")}
                 stretch
                 variant="green"
@@ -75,16 +66,8 @@ export const Slack = () => {
               <Button
                 disabled={isLoading}
                 buttonText="Lunch"
-                emoji="🍛"
+                icon={<CookieIcon />}
                 onClick={() => handleStatusClick("lunch")}
-                stretch
-                variant="yellow"
-              />
-              <Button
-                disabled={isLoading}
-                buttonText="Sunshine"
-                emoji="🌞"
-                onClick={() => handleStatusClick("sunshine")}
                 stretch
                 variant="blue"
               />
@@ -95,26 +78,18 @@ export const Slack = () => {
               <Button
                 disabled={isLoading}
                 buttonText="Laundry"
-                emoji="👕"
+                icon={<MagicWandIcon />}
                 onClick={() => handleStatusClick("laundry")}
                 stretch
-                variant="green"
+                variant="purple"
               />
               <Button
                 disabled={isLoading}
-                buttonText="Tea"
-                emoji="🍵"
-                onClick={() => handleStatusClick("tea")}
+                buttonText="Sunshine"
+                icon={<SunIcon />}
+                onClick={() => handleStatusClick("sunshine")}
                 stretch
                 variant="yellow"
-              />
-              <Button
-                disabled={isLoading}
-                buttonText="Shopping"
-                emoji="🛍️"
-                onClick={() => handleStatusClick("shopping")}
-                stretch
-                variant="blue"
               />
             </Stack>
           </Column>
@@ -129,13 +104,11 @@ export const Slack = () => {
         <Button
           disabled={isLoading}
           buttonText="Clear Status"
-          emoji="🧹"
+          icon={<CrossCircledIcon />}
           onClick={() => handleStatusClick("clear")}
           stretch
           variant="red"
         />
-        <Separator />
-        <Reaction slackDetails={slackDetails} />
       </Stack>
     </Card>
   );
