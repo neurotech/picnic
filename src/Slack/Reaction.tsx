@@ -8,18 +8,17 @@ import { TextInput } from "../TextHelpers/TextInput";
 import formatRelative from "date-fns/formatRelative";
 import { Connector } from "../Connector";
 import { palette } from "../theme/palette";
+import { Card } from "../Card";
 
 interface ReactionProps {
   slackDetails?: SlackDetails;
 }
 
-const DetailsContainer = styled.div``;
-
 const Channel = styled.div<{ active: boolean }>`
   padding: 1rem;
   flex: 1;
   border: 1px solid
-    ${(props) => (props.active ? palette.green.main : palette.yellow.light)};
+    ${(props) => (props.active ? palette.green.main : palette.grey.main)};
   border-radius: 2px;
 
   text-align: center;
@@ -30,7 +29,7 @@ const Timestamp = styled.div<{ active: boolean }>`
   padding: 1rem;
   flex: 1;
   border: 1px solid
-    ${(props) => (props.active ? palette.green.main : palette.yellow.light)};
+    ${(props) => (props.active ? palette.green.main : palette.grey.main)};
   border-radius: 2px;
 
   text-align: center;
@@ -101,29 +100,31 @@ export const Reaction = ({ slackDetails }: ReactionProps) => {
   };
 
   return (
-    <Stack>
-      <Columns space="0">
-        <Column columnWidth="50%">
-          <Channel active={!!slackDetails}>{slackDetails?.channel}</Channel>
-        </Column>
-        <Column columnWidth="50px">
-          <ConnectorContainer>
-            <Connector active={!!slackDetails} />
-          </ConnectorContainer>
-        </Column>
-        <Column columnWidth="50%">
-          <Timestamp active={!!slackDetails}>{formattedTimestamp}</Timestamp>
-        </Column>
-      </Columns>
-      <InputContainer>
-        <TextInput
-          active={!!reactionInput}
-          onChange={(event) => setReactionInput(event.target.value)}
-          onKeyDown={(event) => handleSubmit(event.key)}
-          value={reactionInput}
-        />
-      </InputContainer>
-      <Validation isValid={emojiList.length > 0} />
-    </Stack>
+    <Card heading={"Reaction"}>
+      <Stack>
+        <Columns space="0">
+          <Column columnWidth="50%">
+            <Channel active={!!slackDetails}>{slackDetails?.channel}</Channel>
+          </Column>
+          <Column columnWidth="50px">
+            <ConnectorContainer>
+              <Connector active={!!slackDetails} />
+            </ConnectorContainer>
+          </Column>
+          <Column columnWidth="50%">
+            <Timestamp active={!!slackDetails}>{formattedTimestamp}</Timestamp>
+          </Column>
+        </Columns>
+        <InputContainer>
+          <TextInput
+            active={!!reactionInput}
+            onChange={(event) => setReactionInput(event.target.value)}
+            onKeyDown={(event) => handleSubmit(event.key)}
+            value={reactionInput}
+          />
+        </InputContainer>
+        <Validation isValid={emojiList.length > 0} />
+      </Stack>
+    </Card>
   );
 };
