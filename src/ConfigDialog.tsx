@@ -6,6 +6,9 @@ interface ConfigDialogProps {
   open: boolean;
 }
 
+const getBackdropUrl = (darkMode: boolean) =>
+  `url(./images/config-bg-${darkMode ? "dark" : "light"}.png)`;
+
 const fade = keyframes`
   from {
     opacity: 0;
@@ -22,12 +25,12 @@ const scroll = keyframes`
 `;
 
 const DialogContainer = styled.div<{ isOpen: boolean }>`
-  animation: ${fade} 1s;
+  z-index: 1000;
 `;
 
-const Backdrop = styled.div`
+const Backdrop = styled.div<{ darkMode: boolean }>`
   position: fixed;
-  background: url(https://storage.googleapis.com/subtlepatterns-production/designers/subtlepatterns/uploads/vintage-wallpaper.png);
+  background: ${(props) => getBackdropUrl(props.darkMode)};
   animation: 350s ${scroll} infinite linear;
 
   /* top: 0;
@@ -74,11 +77,13 @@ const Footer = styled.div`
 `;
 
 export const ConfigDialog = ({ open }: ConfigDialogProps) => {
+  const darkMode = window.Main.store.get().darkMode;
+
   return (
     <>
       {open && (
         <DialogContainer isOpen={open}>
-          <Backdrop>
+          <Backdrop darkMode={darkMode}>
             <Dialog>
               <Header></Header>
               <Content></Content>
