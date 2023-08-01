@@ -17,6 +17,8 @@ const createWindow = () => {
 
   win = new BrowserWindow({
     backgroundColor: "#181a20",
+    width: 1280,
+    height: 840,
     autoHideMenuBar: true,
     darkTheme: true,
     webPreferences: {
