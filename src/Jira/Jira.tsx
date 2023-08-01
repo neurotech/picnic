@@ -23,7 +23,7 @@ const getIssue = (rawText: string): string => {
     return issue;
   }
 
-  const expression = /^[fs-]+\d+/gm;
+  const expression = /^([fs-]*[dev-]*)+\d+/gm;
   const matched = rawText.toLowerCase().match(expression);
 
   if (matched?.length) {
