@@ -28,7 +28,7 @@ const runInSequence = (tasks: Task[]) => {
       setTimeout(() => {
         tasks.shift();
         if (tasks.length > 0) runInSequence(tasks);
-      }, 350);
+      }, 1000);
     });
   }
 };
