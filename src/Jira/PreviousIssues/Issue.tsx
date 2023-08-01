@@ -14,7 +14,7 @@ interface IssueProps {
   selected: boolean;
 }
 
-const truncate = (string = "", maxLength = 70) =>
+const truncate = (string = "", maxLength = 65) =>
   string.length > maxLength ? `${string.substring(0, maxLength)}…` : string;
 
 const IssueContainer = styled.div<{ selected: boolean; isLast: boolean }>`
@@ -64,8 +64,11 @@ const IssueContainer = styled.div<{ selected: boolean; isLast: boolean }>`
 
 const IssueKey = styled.div`
   text-align: center;
-  flex: 1 0 100%;
+  display: flex;
   align-self: center;
+  justify-content: center;
+  display: flex;
+  flex: 1;
 `;
 const IssueText = styled.div`
   display: flex;
@@ -108,7 +111,7 @@ export const Issue = ({
       <Columns justifyContent="space-between">
         <Column>
           <Columns>
-            <Column flexGrow={0} flexShrink={0} columnWidth="80px">
+            <Column flexGrow={0} flexShrink={0} columnWidth="90px">
               <IssueKey>
                 <Status variant={"indigo"} statusText={issueKey} />
               </IssueKey>
