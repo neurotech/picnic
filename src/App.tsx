@@ -82,7 +82,6 @@ export const App = () => {
             <Columns space="0.5rem" justifyContent="space-between">
               <Column columnWidth="33%">
                 <Button
-                  variant="purple"
                   buttonText="Toggle Theme"
                   icon={<MoonIcon />}
                   onClick={() =>
@@ -96,7 +95,6 @@ export const App = () => {
               </Column>
               <Column columnWidth="33%">
                 <Button
-                  variant="red"
                   buttonText="Resize Window"
                   icon={<AllSidesIcon />}
                   onClick={() => window.Main.resizeWindow()}
@@ -105,7 +103,6 @@ export const App = () => {
               </Column>
               <Column columnWidth="33%">
                 <Button
-                  variant="green"
                   buttonText="Open Config"
                   icon={<GearIcon />}
                   onClick={() => setConfigOpen(true)}

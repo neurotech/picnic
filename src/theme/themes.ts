@@ -58,9 +58,9 @@ const darkButtons: Buttons = {
   yellow: {
     base: {
       background: palette.yellow.main,
-      color: palette.white.main,
+      color: palette.yellow.dark,
       border: `${palette.yellow.dark}ed`,
-      textShadow: `${palette.yellow.dark}90`,
+      textShadow: `${palette.yellow.dark}40`,
       dropShadow: `${palette.yellow.dark}90`,
     },
     hover: {
@@ -171,10 +171,10 @@ const status: Statuses = {
 
 const dark: Theme = {
   body: {
-    background: "#242529",
+    background: "#1B1D21",
   },
   card: {
-    background: "#1B1D21",
+    background: "#242529",
     border: "#323438",
     color: "#E3E3E3",
     header: "#FFFFFF",
@@ -205,7 +205,7 @@ const dark: Theme = {
   separator: "#323438",
   issues: {
     base: {
-      background: "#242529",
+      background: `${palette.blue.main}10`,
       color: palette.grey.main,
       border: `${palette.blue.main}40`,
     },
@@ -225,14 +225,14 @@ const dark: Theme = {
   status,
   input: {
     base: {
-      background: palette.white.main,
-      color: palette.ash.dark,
-      border: palette.grey.main,
+      background: palette.ash.dark,
+      color: palette.grey.light,
+      border: palette.ash.light,
       placeholder: palette.ash.light,
     },
     active: {
-      background: palette.white.main,
-      color: palette.ash.dark,
+      background: palette.ash.dark,
+      color: palette.grey.light,
       border: palette.blue.main,
       boxShadow: `${palette.blue.main}40`,
     },
@@ -275,7 +275,7 @@ const light: Theme = {
   separator: "#939393",
   issues: {
     base: {
-      background: palette.grey.light,
+      background: `${palette.blue.main}10`,
       color: palette.ash.main,
       border: `${palette.blue.main}40`,
     },

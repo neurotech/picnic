@@ -81,6 +81,7 @@ const IssuesFooterText = styled.div`
 `;
 
 const NoIssuesFound = styled.div`
+  background-color: ${(props) => props.theme.issues.base.background};
   user-select: none;
   padding: 0.25rem 0.5rem;
   min-height: 2rem;

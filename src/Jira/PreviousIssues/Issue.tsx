@@ -34,7 +34,9 @@ const IssueContainer = styled.div<{ selected: boolean; isLast: boolean }>`
     props.isLast ? "unset" : `1px solid ${props.theme.issues.base.border}`};
 
   background-color: ${(props) =>
-    props.selected ? props.theme.issues.selected.background : "none"};
+    props.selected
+      ? props.theme.issues.selected.background
+      : props.theme.issues.base.background};
 
   color: ${(props) => props.theme.issues.base.color};
 

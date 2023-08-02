@@ -61,7 +61,6 @@ export const Slack = () => {
                 icon={<LinkBreak2Icon />}
                 onClick={() => handleStatusClick("brb")}
                 stretch
-                variant="green"
               />
               <Button
                 disabled={isLoading}
@@ -69,7 +68,6 @@ export const Slack = () => {
                 icon={<CookieIcon />}
                 onClick={() => handleStatusClick("lunch")}
                 stretch
-                variant="blue"
               />
             </Stack>
           </Column>
@@ -81,7 +79,6 @@ export const Slack = () => {
                 icon={<MagicWandIcon />}
                 onClick={() => handleStatusClick("laundry")}
                 stretch
-                variant="purple"
               />
               <Button
                 disabled={isLoading}
@@ -89,7 +86,6 @@ export const Slack = () => {
                 icon={<SunIcon />}
                 onClick={() => handleStatusClick("sunshine")}
                 stretch
-                variant="yellow"
               />
             </Stack>
           </Column>
