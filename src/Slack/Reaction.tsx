@@ -6,54 +6,53 @@ import { Column } from "../layout/Column";
 import { Stack } from "../layout/Stack";
 import { TextInput } from "../TextHelpers/TextInput";
 import formatRelative from "date-fns/formatRelative";
-import { Connector } from "../Connector";
-import { palette } from "../theme/palette";
 import { Card } from "../Card";
+import { Dossier } from "../Dossier";
+import { Alert, AlertLevel } from "../Alert";
 
 interface ReactionProps {
   slackDetails?: SlackDetails;
 }
-
-const Channel = styled.div<{ active: boolean }>`
-  padding: 1rem;
-  flex: 1;
-  border: 1px solid
-    ${(props) => (props.active ? palette.green.main : palette.grey.main)};
-  border-radius: 2px;
-
-  text-align: center;
-  color: ${(props) =>
-    props.active ? palette.green.main : palette.yellow.light};
-`;
-const Timestamp = styled.div<{ active: boolean }>`
-  padding: 1rem;
-  flex: 1;
-  border: 1px solid
-    ${(props) => (props.active ? palette.green.main : palette.grey.main)};
-  border-radius: 2px;
-
-  text-align: center;
-  color: ${(props) =>
-    props.active ? palette.green.main : palette.yellow.light};
-`;
-
-const ConnectorContainer = styled.div`
-  align-self: center;
-`;
 
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const Validation = styled.div<{ isValid: boolean }>`
-  height: 20px;
-  border-radius: 4px;
-  background-color: ${(props) =>
-    props.isValid ? palette.green.main : palette.red.main};
+const StyledAlert = styled(Alert)`
+  border-radius: 0;
 `;
 
-// https://phocassoftware.slack.com/archives/DBNMKSPFZ/p1667279007479369
+const getAlert = (
+  slackDetails: SlackDetails | undefined,
+  reactionInput: string,
+  emojiListLength: number
+): [string, AlertLevel] => {
+  if (slackDetails) {
+    if (!reactionInput) {
+      return [
+        "Valid Slack link found in clipboard. Please enter a word above.",
+        "warning",
+      ];
+    }
+
+    if (reactionInput) {
+      if (emojiListLength < 1) {
+        return [
+          `"${reactionInput}" is invalid! You have too many occurrences of a letter.`,
+          "error",
+        ];
+      } else {
+        return [
+          `"${reactionInput}" is valid. Press Enter to send your reaction!`,
+          "success",
+        ];
+      }
+    }
+  }
+
+  return ["Please copy a link to a Slack message to your clipboard.", "info"];
+};
 
 export const Reaction = ({ slackDetails }: ReactionProps) => {
   let formattedTimestamp;
@@ -99,31 +98,57 @@ export const Reaction = ({ slackDetails }: ReactionProps) => {
     }
   };
 
+  const [alertText, alertLevel] = getAlert(
+    slackDetails,
+    reactionInput,
+    emojiList.length
+  );
+
   return (
     <Card heading={"Reaction"}>
       <Stack>
-        <Columns space="0">
+        <Columns>
           <Column columnWidth="50%">
-            <Channel active={!!slackDetails}>{slackDetails?.channel}</Channel>
-          </Column>
-          <Column columnWidth="50px">
-            <ConnectorContainer>
-              <Connector active={!!slackDetails} />
-            </ConnectorContainer>
+            <Dossier
+              headerText={"Message ID"}
+              bodyContent={
+                <StyledAlert
+                  alertText={slackDetails?.channel || "—"}
+                  level={slackDetails?.channel ? "success" : "neutral"}
+                  monospace={Boolean(slackDetails)}
+                  stretch
+                />
+              }
+              position="left"
+              variant={slackDetails?.channel ? "green" : "blue"}
+            />
           </Column>
           <Column columnWidth="50%">
-            <Timestamp active={!!slackDetails}>{formattedTimestamp}</Timestamp>
+            <Dossier
+              headerText={"Message Timestamp"}
+              bodyContent={
+                <StyledAlert
+                  alertText={formattedTimestamp || "—"}
+                  level={formattedTimestamp ? "success" : "neutral"}
+                  stretch
+                />
+              }
+              position="right"
+              variant={formattedTimestamp ? "green" : "blue"}
+            />
           </Column>
         </Columns>
         <InputContainer>
           <TextInput
             active={!!reactionInput}
+            invalid={!!reactionInput && emojiList.length < 1}
+            disabled={!slackDetails}
             onChange={(event) => setReactionInput(event.target.value)}
             onKeyDown={(event) => handleSubmit(event.key)}
             value={reactionInput}
           />
         </InputContainer>
-        <Validation isValid={emojiList.length > 0} />
+        <Alert alertText={alertText} level={alertLevel} stretch />
       </Stack>
     </Card>
   );
