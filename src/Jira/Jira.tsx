@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { Issue, PreviousIssues } from "./PreviousIssues/PreviousIssues";
 import { Alert, AlertLevel } from "../Alert";
 import { language } from "../utilities/language";
+import { getIssue } from "../utilities/jira";
 
 export type RequestType = "branch" | "pr" | "issueText";
 
@@ -15,23 +16,6 @@ export interface GeneratedText {
   issueKey: string;
   issueText: string;
 }
-
-const getIssue = (rawText: string): string => {
-  let issue = "";
-
-  if (typeof rawText !== "string" || rawText.length >= 10) {
-    return issue;
-  }
-
-  const expression = /^([fs-]*[dev-]*)+\d+/gm;
-  const matched = rawText.toLowerCase().match(expression);
-
-  if (matched?.length) {
-    issue = matched[0];
-  }
-
-  return issue.toLowerCase();
-};
 
 export const Jira = () => {
   const [alertText, setAlertText] = useState<string>(
