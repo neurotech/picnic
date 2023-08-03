@@ -5,6 +5,7 @@ import { useState } from "react";
 import { keyframes } from "@emotion/react";
 import { Stack } from "../../layout/Stack";
 import { Button } from "../../Button";
+import { Dossier } from "../../Dossier";
 
 interface PreviousIssuesProps {
   issues: Issue[];
@@ -94,19 +95,17 @@ export const PreviousIssues = ({
   setIssues,
   validIssue,
 }: PreviousIssuesProps) => {
-  const [copied, setCopied] = useState<boolean>(false);
   const sortedIssues = issues.sort((a, b) => {
     return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
   });
 
   return (
-    <IssuesContainer>
-      <IssuesHeader>
-        <IssuesHeaderText>{"Previous Issues"}</IssuesHeaderText>
-        {copied && <Copied copied={copied}>{"Copied!"}</Copied>}
-      </IssuesHeader>
-      <IssuesBody>
-        {!issues.length ? (
+    <Dossier
+      headerText="Previous Issues"
+      position="left"
+      variant={issues.length ? "green" : "blue"}
+      bodyContent={
+        !issues.length ? (
           <NoIssuesFound>{"No issues found."}</NoIssuesFound>
         ) : (
           <Stack space="0">
@@ -116,27 +115,27 @@ export const PreviousIssues = ({
                 issueKey={issue.key}
                 issueText={issue.text}
                 issueTimestamp={issue.timestamp}
-                setCopied={setCopied}
                 isLast={index === sortedIssues.length - 1}
                 selected={issue.key === validIssue?.toUpperCase()}
               />
             ))}
           </Stack>
-        )}
-      </IssuesBody>
-      {issues.length > 0 && (
-        <IssuesFooter>
-          <IssuesFooterText>
-            <Button
-              size="small"
-              minWidth={10}
-              buttonText="Clear"
-              variant="red"
-              onClick={() => setIssues([])}
-            />
-          </IssuesFooterText>
-        </IssuesFooter>
-      )}
-    </IssuesContainer>
+        )
+      }
+      footerContent={
+        <Button
+          size="small"
+          minWidth={10}
+          buttonText="Clear"
+          variant="red"
+          onClick={() => {
+            setIssues([]);
+            if (validIssue) {
+              window.Main.setClipboardText("");
+            }
+          }}
+        />
+      }
+    />
   );
 };
