@@ -133,14 +133,14 @@ const lightButtons: Buttons = {
   },
   yellow: {
     base: {
-      background: palette.yellow.main,
-      color: palette.white.main,
+      background: palette.yellow.light,
+      color: palette.yellow.dark,
       border: `${palette.yellow.dark}60`,
-      textShadow: `${palette.yellow.dark}80`,
-      dropShadow: `${palette.yellow.dark}80`,
+      textShadow: `${palette.yellow.dark}13`,
+      dropShadow: `${palette.yellow.dark}13`,
     },
     hover: {
-      background: palette.yellow.light,
+      background: palette.yellow.main,
       color: palette.yellow.dark,
     },
   },
@@ -231,10 +231,16 @@ const dark: Theme = {
       placeholder: palette.ash.light,
     },
     active: {
-      background: palette.ash.dark,
+      background: palette.ash.main,
       color: palette.grey.light,
       border: palette.blue.main,
       boxShadow: `${palette.blue.main}40`,
+    },
+    disabled: {
+      background: palette.ash.light,
+      color: palette.ash.main,
+      border: palette.ash.dark,
+      placeholder: palette.ash.main,
     },
   },
 };
@@ -305,6 +311,12 @@ const light: Theme = {
       color: palette.ash.dark,
       border: palette.blue.main,
       boxShadow: `${palette.blue.main}40`,
+    },
+    disabled: {
+      background: palette.grey.main,
+      color: palette.ash.dark,
+      border: palette.grey.dark,
+      placeholder: palette.ash.light,
     },
   },
 };

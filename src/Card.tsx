@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 interface CardProps {
   children: ReactNode;
   heading: string;
+  icon?: ReactNode;
 }
 
 const CardContainer = styled.div`
@@ -17,10 +18,14 @@ const CardContainer = styled.div`
   flex: 1;
 `;
 
-const Header = styled.header`
-  border-bottom: 1px solid ${(props) => props.theme.card.border};
-  color: ${(props) => props.theme.card.header};
+const HeaderContainer = styled.div`
+  width: 100%;
   display: flex;
+  border-bottom: 1px solid ${(props) => props.theme.card.border};
+`;
+
+const Header = styled.header`
+  color: ${(props) => props.theme.card.header};
   font-size: 16px;
   font-weight: 500;
   line-height: 17px;
@@ -35,9 +40,12 @@ const CardContent = styled.div`
   align-self: stretch;
 `;
 
-export const Card = ({ children, heading }: CardProps) => (
+export const Card = ({ children, heading, icon }: CardProps) => (
   <CardContainer>
-    <Header>{heading}</Header>
+    <HeaderContainer>
+      <Header>{heading}</Header>
+      {icon}
+    </HeaderContainer>
     <CardContent>{children}</CardContent>
   </CardContainer>
 );

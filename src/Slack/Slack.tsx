@@ -67,6 +67,7 @@ export const Slack = () => {
                 buttonText="Lunch"
                 icon={<CookieIcon />}
                 onClick={() => handleStatusClick("lunch")}
+                variant="green"
                 stretch
               />
             </Stack>
@@ -78,6 +79,7 @@ export const Slack = () => {
                 buttonText="Laundry"
                 icon={<MagicWandIcon />}
                 onClick={() => handleStatusClick("laundry")}
+                variant="purple"
                 stretch
               />
               <Button
@@ -85,6 +87,7 @@ export const Slack = () => {
                 buttonText="Sunshine"
                 icon={<SunIcon />}
                 onClick={() => handleStatusClick("sunshine")}
+                variant="yellow"
                 stretch
               />
             </Stack>

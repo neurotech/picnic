@@ -9,15 +9,6 @@ interface ConfigDialogProps {
 const getBackdropUrl = (darkMode: boolean) =>
   `url(./images/config-bg-${darkMode ? "dark" : "light"}.png)`;
 
-const fade = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-
 const scroll = keyframes`
   100% {
     background-position: -3000px 3000px;

@@ -29,6 +29,7 @@ interface AlertTheme {
 interface InputStates {
   base: BaseColours;
   active: BaseColours;
+  disabled: BaseColours;
 }
 
 interface IssuesTheme {

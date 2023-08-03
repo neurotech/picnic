@@ -28,7 +28,9 @@ const Container = styled.div`
 export const App = () => {
   const [configOpen, setConfigOpen] = useState<boolean>(false);
   const [config, setConfig] = useState<Store>(window.Main.store.get());
-  const [slackDetails, setSlackDetails] = useState<SlackDetails | undefined>();
+  const [slackDetails, setSlackDetails] = useState<SlackDetails | undefined>(
+    undefined
+  );
   const [theme, setTheme] = useState<Theme>(
     themes[config?.darkMode ? "dark" : "light"]
   );
@@ -90,6 +92,7 @@ export const App = () => {
                       darkMode: !previousState.darkMode,
                     }))
                   }
+                  variant="purple"
                   stretch
                 />
               </Column>
@@ -98,6 +101,7 @@ export const App = () => {
                   buttonText="Resize Window"
                   icon={<AllSidesIcon />}
                   onClick={() => window.Main.resizeWindow()}
+                  variant="red"
                   stretch
                 />
               </Column>

@@ -41,6 +41,7 @@ const buttonSizes: Sizes = {
 };
 
 const StyledButton = styled.button<StyledButtonProps>`
+  user-select: none;
   min-width: ${(props) => (props.minWidth ? `${props.minWidth}px` : "unset")};
 
   border: 1px solid ${(props) => props.theme.button[props.variant].base.border};
