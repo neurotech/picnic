@@ -9,7 +9,6 @@ interface IssueProps {
   issueKey: string;
   issueText: string;
   issueTimestamp: Date;
-  setCopied: (copied: boolean) => void;
   isLast: boolean;
   selected: boolean;
 }
@@ -91,7 +90,6 @@ export const Issue = ({
   issueKey,
   issueText,
   issueTimestamp,
-  setCopied,
   isLast,
   selected,
 }: IssueProps) => {
@@ -104,11 +102,7 @@ export const Issue = ({
       title={issueText}
       selected={selected}
       isLast={isLast}
-      onClick={() => {
-        window.Main.setClipboardText(issueKey);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2500);
-      }}
+      onClick={() => window.Main.setClipboardText(issueKey)}
     >
       <Columns justifyContent="space-between">
         <Column>
