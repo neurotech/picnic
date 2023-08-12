@@ -1,4 +1,4 @@
-name: Picnic Pull Request
+name: Build & Run Tests
 
 on:
   push:
