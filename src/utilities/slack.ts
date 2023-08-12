@@ -32,6 +32,7 @@ export interface SlackProfile {
 
 export interface SlackStatusBody {
   profile: SlackProfile;
+  timeout: number;
 }
 
 const getNowPlusOneHour = () => Math.floor(Date.now() / 1000) + 3600;
@@ -59,59 +60,73 @@ const getShoppingEmoji = (): string =>
 export const getSlackStatus = (
   statusType: SlackStatusType
 ): SlackStatusBody => {
+  let timeout = 0;
+
   switch (statusType) {
     case "brb":
+      timeout = getNowPlusFiveMinutes();
       return {
         profile: {
           status_emoji: getBrbEmoji(),
           status_text: "BRB",
-          status_expiration: getNowPlusFiveMinutes(),
+          status_expiration: timeout,
         },
+        timeout,
       };
 
     case "lunch":
+      timeout = getNowPlusOneHour();
       return {
         profile: {
           status_emoji: getFoodEmoji(),
           status_text: "Lunch",
-          status_expiration: getNowPlusOneHour(),
+          status_expiration: timeout,
         },
+        timeout,
       };
 
     case "sunshine":
+      timeout = getNowPlusFifteenMinutes();
       return {
         profile: {
           status_emoji: getSunshineEmoji(),
           status_text: "Sunshine break.",
-          status_expiration: getNowPlusFifteenMinutes(),
+          status_expiration: timeout,
         },
+        timeout,
       };
 
     case "laundry":
+      timeout = getNowPlusFifteenMinutes();
       return {
         profile: {
           status_emoji: getLaundryEmoji(),
           status_text: "Laundry",
-          status_expiration: getNowPlusFifteenMinutes(),
+          status_expiration: timeout,
         },
+        timeout,
       };
 
     case "tea":
+      timeout = getNowPlusFifteenMinutes();
       return {
         profile: {
           status_emoji: getTeaEmoji(),
           status_text: "Tea break ~",
-          status_expiration: getNowPlusFifteenMinutes(),
+          status_expiration: timeout,
         },
+        timeout,
       };
 
     case "shopping":
+      timeout = getNowPlusFifteenMinutes();
       return {
         profile: {
           status_emoji: getShoppingEmoji(),
           status_text: "Food shopping has arrived.",
-          status_expiration: getNowPlusFifteenMinutes(),
+          status_expiration: timeout,
         },
+        timeout,
       };
 
     case "clear":
@@ -122,6 +137,7 @@ export const getSlackStatus = (
           status_text: "",
           status_expiration: 0,
         },
+        timeout: 0,
       };
   }
 };
