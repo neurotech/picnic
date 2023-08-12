@@ -1,5 +1,4 @@
 export const language = {
-  CopiedToClipboard: "Copied to clipboard!",
   ErrorQueryingTheJiraAPI: "Error querying the Jira API!",
   ErrorSendingStatusToSlackAPI: "Error sending status to Slack API!",
   NoValidIssueKeyFoundInClipboard: "No valid issue key found in clipboard.",
@@ -14,5 +13,6 @@ export const language = {
   StatusSetToShopping: "Status set to: Shopping",
   StatusSetToSunshine: "Status set to: Sunshine",
   StatusSetToTea: "Status set to: Tea",
-  ValidIssueKeyFoundInClipboard: "Valid issue key found in clipboard.",
+  SuccessfullyGeneratedA: "Successfully generated a",
+  ValidIssueKeyFoundInClipboard: "Valid issue key found in clipboard!"
 };
