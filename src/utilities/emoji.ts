@@ -9,7 +9,7 @@ export const foodEmoji = [
   ":fries:",
   ":fried_egg:",
   ":bacon:",
-  ":knife_fork_plate:",
+  ":knife_fork_plate:"
 ];
 
 export const sunshineEmoji = [
@@ -17,7 +17,7 @@ export const sunshineEmoji = [
   ":sunny:",
   ":city_sunrise:",
   ":sun_with_face:",
-  ":sunrise_over_mountains:",
+  ":sunrise_over_mountains:"
 ];
 
 export const laundryEmoji = [":shirt:", ":jeans:"];
@@ -54,7 +54,7 @@ export const letterEmoji: Record<string, string> = {
   w: "letter_w",
   x: "letter_x",
   y: "letter_y",
-  z: "letter_z",
+  z: "letter_z"
 };
 
 export const phocasLetterEmoji: Record<string, string> = {
@@ -83,5 +83,5 @@ export const phocasLetterEmoji: Record<string, string> = {
   w: "phocas_w",
   x: "phocas_x",
   y: "phocas_y",
-  z: "phocas_z",
+  z: "phocas_z"
 };

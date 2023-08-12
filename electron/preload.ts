@@ -68,7 +68,7 @@ const generateText = (
     return {
       issueKey: prefix,
       issueText: issue,
-      text: `${prefix}-${branchName}`,
+      text: `${prefix}-${branchName}`
     };
   }
 
@@ -77,21 +77,21 @@ const generateText = (
       return {
         issueKey: prefix,
         issueText: issue,
-        text: `${type} - ${prefix} - ${issue}`,
+        text: `${type} - ${prefix} - ${issue}`
       };
     }
 
     return {
       issueKey: prefix,
       issueText: issue,
-      text: `${prefix} - ${issue}`,
+      text: `${prefix} - ${issue}`
     };
   }
 
   return {
     issueKey: prefix,
     issueText: issue,
-    text: "",
+    text: ""
   };
 };
 
@@ -100,7 +100,7 @@ export const api = {
 
   store: {
     get: (): Store => ipcRenderer.sendSync("store-get"),
-    set: (store: Store) => ipcRenderer.sendSync("store-set", store),
+    set: (store: Store) => ipcRenderer.sendSync("store-set", store)
   },
 
   readClipboardText: () => clipboard.readText(),
@@ -117,8 +117,8 @@ export const api = {
         url,
         data,
         headers: {
-          Authorization: `Bearer ${authValue}`,
-        },
+          Authorization: `Bearer ${authValue}`
+        }
       });
 
       if (response.body) {
@@ -139,13 +139,13 @@ export const api = {
     const url = `https://slack.com/api/reactions.add`;
     const authValue = config.slackToken;
     const headers = {
-      Authorization: `Bearer ${authValue}`,
+      Authorization: `Bearer ${authValue}`
     };
 
     const tasks = emojiList.map((name) => ({
       url,
       data: { channel, name, timestamp },
-      headers,
+      headers
     }));
 
     runInSequence(tasks);
@@ -164,8 +164,8 @@ export const api = {
       const response = await tiny.get({
         url,
         headers: {
-          Authorization: `Basic ${authValue}`,
-        },
+          Authorization: `Basic ${authValue}`
+        }
       });
 
       if (response.body && response.body.issues) {
@@ -186,7 +186,7 @@ export const api = {
       console.error(error);
       return { success: false, error: true };
     }
-  },
+  }
 };
 
 contextBridge.exposeInMainWorld("Main", api);

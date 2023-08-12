@@ -9,12 +9,12 @@ const darkButtons: Buttons = {
       color: palette.white.main,
       border: `${palette.blue.dark}ed`,
       textShadow: `${palette.blue.dark}80`,
-      dropShadow: `${palette.blue.dark}80`,
+      dropShadow: `${palette.blue.dark}80`
     },
     hover: {
       background: palette.blue.light,
-      color: palette.blue.dark,
-    },
+      color: palette.blue.dark
+    }
   },
   red: {
     base: {
@@ -22,12 +22,12 @@ const darkButtons: Buttons = {
       color: palette.white.main,
       border: `${palette.red.dark}ed`,
       textShadow: `${palette.red.dark}80`,
-      dropShadow: `${palette.red.dark}80`,
+      dropShadow: `${palette.red.dark}80`
     },
     hover: {
       background: palette.red.light,
-      color: palette.red.dark,
-    },
+      color: palette.red.dark
+    }
   },
   purple: {
     base: {
@@ -35,12 +35,12 @@ const darkButtons: Buttons = {
       color: palette.white.main,
       border: `${palette.purple.dark}ed`,
       textShadow: `${palette.purple.dark}80`,
-      dropShadow: `${palette.purple.dark}80`,
+      dropShadow: `${palette.purple.dark}80`
     },
     hover: {
       background: palette.purple.light,
-      color: palette.purple.dark,
-    },
+      color: palette.purple.dark
+    }
   },
   green: {
     base: {
@@ -48,12 +48,12 @@ const darkButtons: Buttons = {
       color: palette.white.main,
       border: `${palette.green.dark}ed`,
       textShadow: `${palette.green.dark}80`,
-      dropShadow: `${palette.green.dark}80`,
+      dropShadow: `${palette.green.dark}80`
     },
     hover: {
       background: palette.green.light,
-      color: palette.green.dark,
-    },
+      color: palette.green.dark
+    }
   },
   yellow: {
     base: {
@@ -61,21 +61,21 @@ const darkButtons: Buttons = {
       color: palette.yellow.dark,
       border: `${palette.yellow.dark}ed`,
       textShadow: `${palette.yellow.dark}40`,
-      dropShadow: `${palette.yellow.dark}90`,
+      dropShadow: `${palette.yellow.dark}90`
     },
     hover: {
       background: palette.yellow.light,
-      color: palette.yellow.dark,
-    },
+      color: palette.yellow.dark
+    }
   },
   disabled: {
     base: {
       background: palette.ash.main,
       color: palette.ash.light,
-      border: `${palette.ash.light}42`,
+      border: `${palette.ash.light}42`
     },
-    hover: { background: palette.ash.main, color: palette.ash.light },
-  },
+    hover: { background: palette.ash.main, color: palette.ash.light }
+  }
 };
 
 const lightButtons: Buttons = {
@@ -85,12 +85,12 @@ const lightButtons: Buttons = {
       color: palette.white.main,
       border: `${palette.blue.dark}60`,
       textShadow: `${palette.blue.dark}80`,
-      dropShadow: `${palette.blue.dark}80`,
+      dropShadow: `${palette.blue.dark}80`
     },
     hover: {
       background: palette.blue.light,
-      color: palette.blue.dark,
-    },
+      color: palette.blue.dark
+    }
   },
   red: {
     base: {
@@ -98,12 +98,12 @@ const lightButtons: Buttons = {
       color: palette.white.main,
       border: `${palette.red.dark}60`,
       textShadow: `${palette.red.dark}80`,
-      dropShadow: `${palette.red.dark}80`,
+      dropShadow: `${palette.red.dark}80`
     },
     hover: {
       background: palette.red.light,
-      color: palette.red.dark,
-    },
+      color: palette.red.dark
+    }
   },
   purple: {
     base: {
@@ -111,12 +111,12 @@ const lightButtons: Buttons = {
       color: palette.white.main,
       border: `${palette.purple.dark}60`,
       textShadow: `${palette.purple.dark}80`,
-      dropShadow: `${palette.purple.dark}80`,
+      dropShadow: `${palette.purple.dark}80`
     },
     hover: {
       background: palette.purple.light,
-      color: palette.purple.dark,
-    },
+      color: palette.purple.dark
+    }
   },
   green: {
     base: {
@@ -124,12 +124,12 @@ const lightButtons: Buttons = {
       color: palette.white.main,
       border: `${palette.green.dark}60`,
       textShadow: `${palette.green.dark}80`,
-      dropShadow: `${palette.green.dark}80`,
+      dropShadow: `${palette.green.dark}80`
     },
     hover: {
       background: palette.green.light,
-      color: palette.green.dark,
-    },
+      color: palette.green.dark
+    }
   },
   yellow: {
     base: {
@@ -137,21 +137,21 @@ const lightButtons: Buttons = {
       color: palette.yellow.dark,
       border: `${palette.yellow.dark}60`,
       textShadow: "transparent",
-      dropShadow: "transparent",
+      dropShadow: "transparent"
     },
     hover: {
       background: palette.yellow.main,
-      color: palette.yellow.dark,
-    },
+      color: palette.yellow.dark
+    }
   },
   disabled: {
     base: {
       background: palette.grey.main,
       color: palette.grey.dark,
-      border: `${palette.grey.dark}60`,
+      border: `${palette.grey.dark}60`
     },
-    hover: { background: palette.grey.main, color: palette.grey.dark },
-  },
+    hover: { background: palette.grey.main, color: palette.grey.dark }
+  }
 };
 
 const status: Statuses = {
@@ -166,40 +166,40 @@ const status: Statuses = {
   lime: { background: "rgba(116, 184, 22, 0.1)", color: "#74b816" },
   green: { background: "rgba(47, 179, 68, 0.1)", color: "#2fb344" },
   teal: { background: "rgba(12, 166, 120, 0.1)", color: "#0ca678" },
-  cyan: { background: "rgba(23, 162, 184, 0.1)", color: "#17a2b8" },
+  cyan: { background: "rgba(23, 162, 184, 0.1)", color: "#17a2b8" }
 };
 
 const dark: Theme = {
   body: {
-    background: "#1B1D21",
+    background: "#1B1D21"
   },
   card: {
     background: "#242529",
     border: "#323438",
     color: "#E3E3E3",
-    header: "#FFFFFF",
+    header: "#FFFFFF"
   },
   alert: {
     success: {
       background: "rgba(57, 255, 113, 0.1)",
-      color: "#39FF71",
+      color: "#39FF71"
     },
     error: {
       background: "rgba(255, 57, 57, 0.1)",
-      color: "#FF3939",
+      color: "#FF3939"
     },
     warning: {
       background: "rgba(255, 188, 57, 0.1)",
-      color: "#FFBC39",
+      color: "#FFBC39"
     },
     info: {
       background: "rgba(57, 136, 255, 0.1)",
-      color: "#3988FF",
+      color: "#3988FF"
     },
     neutral: {
       background: "rgba(144, 139, 157, 0.1)",
-      color: "#908B9D",
-    },
+      color: "#908B9D"
+    }
   },
   button: darkButtons,
   separator: "#323438",
@@ -207,20 +207,20 @@ const dark: Theme = {
     base: {
       background: `${palette.blue.main}10`,
       color: palette.grey.main,
-      border: `${palette.blue.main}40`,
+      border: `${palette.blue.main}40`
     },
     hover: {
       background: `${palette.yellow.main}20`,
-      color: palette.grey.main,
+      color: palette.grey.main
     },
     active: {
       background: `${palette.yellow.main}60`,
-      color: palette.grey.main,
+      color: palette.grey.main
     },
     selected: {
       background: `${palette.blue.main}10`,
-      color: palette.green.dark,
-    },
+      color: palette.green.dark
+    }
   },
   status,
   input: {
@@ -228,63 +228,63 @@ const dark: Theme = {
       background: palette.ash.dark,
       color: palette.grey.light,
       border: palette.ash.light,
-      placeholder: palette.ash.light,
+      placeholder: palette.ash.light
     },
     active: {
       background: palette.ash.main,
       color: palette.grey.light,
       border: palette.blue.main,
-      boxShadow: `${palette.blue.main}40`,
+      boxShadow: `${palette.blue.main}40`
     },
     disabled: {
       background: palette.ash.light,
       color: palette.ash.main,
       border: palette.ash.dark,
-      placeholder: palette.ash.main,
-    },
+      placeholder: palette.ash.main
+    }
   },
   progressBar: {
     container: {
       border: palette.ash.light,
-      background: palette.ash.dark,
+      background: palette.ash.dark
     },
     bar: {
-      background: palette.ash.light,
-    },
-  },
+      background: palette.ash.light
+    }
+  }
 };
 
 const light: Theme = {
   body: {
-    background: "#C9C9C9",
+    background: "#C9C9C9"
   },
   card: {
     background: "#FFFFFF",
     border: "#939393",
     color: "#404040",
-    header: "#000000",
+    header: "#000000"
   },
   alert: {
     success: {
       background: "rgba(57, 255, 113, 0.26)",
-      color: "#08872C",
+      color: "#08872C"
     },
     error: {
       background: "rgba(255, 57, 57, 0.2)",
-      color: "#FF3939",
+      color: "#FF3939"
     },
     warning: {
       background: "rgba(255, 188, 57, 0.2)",
-      color: "#CD8C0E",
+      color: "#CD8C0E"
     },
     info: {
       background: "rgba(57, 136, 255, 0.17)",
-      color: "#3988FF",
+      color: "#3988FF"
     },
     neutral: {
       background: "rgba(118, 113, 130, 0.17)",
-      color: "#767182",
-    },
+      color: "#767182"
+    }
   },
   button: lightButtons,
   separator: "#939393",
@@ -292,20 +292,20 @@ const light: Theme = {
     base: {
       background: `${palette.blue.main}10`,
       color: palette.ash.main,
-      border: `${palette.blue.main}40`,
+      border: `${palette.blue.main}40`
     },
     hover: {
       background: `${palette.yellow.main}20`,
-      color: palette.ash.main,
+      color: palette.ash.main
     },
     active: {
       background: `${palette.yellow.main}60`,
-      color: palette.ash.main,
+      color: palette.ash.main
     },
     selected: {
       background: `${palette.blue.main}10`,
-      color: palette.green.dark,
-    },
+      color: palette.green.dark
+    }
   },
   status,
   input: {
@@ -313,30 +313,30 @@ const light: Theme = {
       background: palette.snow.main,
       color: palette.ash.dark,
       border: palette.grey.main,
-      placeholder: palette.ash.light,
+      placeholder: palette.ash.light
     },
     active: {
       background: palette.white.main,
       color: palette.ash.dark,
       border: palette.blue.main,
-      boxShadow: `${palette.blue.main}40`,
+      boxShadow: `${palette.blue.main}40`
     },
     disabled: {
       background: palette.grey.main,
       color: palette.ash.dark,
       border: palette.grey.dark,
-      placeholder: palette.ash.light,
-    },
+      placeholder: palette.ash.light
+    }
   },
   progressBar: {
     container: {
       border: palette.grey.dark,
-      background: palette.snow.main,
+      background: palette.snow.main
     },
     bar: {
-      background: palette.grey.main,
-    },
-  },
+      background: palette.grey.main
+    }
+  }
 };
 
 export const themes = { dark, light };

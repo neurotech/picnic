@@ -24,7 +24,7 @@ const StyledColumns = styled.div<ColumnsProps>`
 `;
 
 export const ColumnsContext = createContext({
-  space: "1rem",
+  space: "1rem"
 });
 
 export const Columns = ({
@@ -34,7 +34,7 @@ export const Columns = ({
   flow,
   justifyContent = "flex-start",
   onClick,
-  space = "1rem",
+  space = "1rem"
 }: ColumnsProps) => {
   return (
     <StyledColumns

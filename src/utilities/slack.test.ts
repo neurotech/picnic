@@ -3,13 +3,13 @@ import { getEmojiListForInput, parseInputForSlackDetails } from "./slack";
 
 const parseInputForSlackDetailsCases = [
   {
-    input: "asdf",
+    input: "asdf"
   },
   {
-    input: "http://hackz.net",
+    input: "http://hackz.net"
   },
   {
-    input: "https://github.com/org/repo/pull/999",
+    input: "https://github.com/org/repo/pull/999"
   },
   {
     input:
@@ -17,8 +17,8 @@ const parseInputForSlackDetailsCases = [
     expectedValue: {
       channel: "GTMAS1W93",
       timestamp: "1689551795.320299",
-      unixTimestamp: "1689551795320",
-    },
+      unixTimestamp: "1689551795320"
+    }
   },
   {
     input:
@@ -26,8 +26,8 @@ const parseInputForSlackDetailsCases = [
     expectedValue: {
       channel: "D02HY4X6ZGU",
       timestamp: "1689661090.330279",
-      unixTimestamp: "1689661090330",
-    },
+      unixTimestamp: "1689661090330"
+    }
   },
   {
     input:
@@ -35,9 +35,9 @@ const parseInputForSlackDetailsCases = [
     expectedValue: {
       channel: "G01H093HWPP",
       timestamp: "1689654546.437409",
-      unixTimestamp: "1689654546437",
-    },
-  },
+      unixTimestamp: "1689654546437"
+    }
+  }
 ];
 
 test.each(parseInputForSlackDetailsCases)(
@@ -56,7 +56,7 @@ describe("getEmojiListForInput", () => {
     expect(getEmojiListForInput("hih")).toEqual([
       "letter_h",
       "letter_i",
-      "phocas_h",
+      "phocas_h"
     ]);
   });
 

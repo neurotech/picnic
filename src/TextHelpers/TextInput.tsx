@@ -82,7 +82,10 @@ const Input = styled.input<
     }
   }
 
-  transition: background 0.2s, border 0.2s, box-shadow 0.2s;
+  transition:
+    background 0.2s,
+    border 0.2s,
+    box-shadow 0.2s;
 `;
 
 export const TextInput = ({

@@ -28,7 +28,7 @@ const NoIssuesFound = styled.div`
 export const PreviousIssues = ({
   issues,
   setIssues,
-  validIssue,
+  validIssue
 }: PreviousIssuesProps) => {
   const sortedIssues = issues.sort((a, b) => {
     return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();

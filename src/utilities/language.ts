@@ -14,5 +14,5 @@ export const language = {
   StatusSetToSunshine: "Status set to: Sunshine",
   StatusSetToTea: "Status set to: Tea",
   SuccessfullyGeneratedA: "Successfully generated a",
-  ValidIssueKeyFoundInClipboard: "Valid issue key found in clipboard!",
+  ValidIssueKeyFoundInClipboard: "Valid issue key found in clipboard!"
 };

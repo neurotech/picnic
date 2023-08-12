@@ -32,7 +32,7 @@ const getAlert = (
     if (!reactionInput) {
       return [
         "Valid Slack link found in clipboard. Please enter a word above.",
-        "warning",
+        "warning"
       ];
     }
 
@@ -40,12 +40,12 @@ const getAlert = (
       if (emojiListLength < 1) {
         return [
           `"${reactionInput}" is invalid! You have too many occurrences of a letter.`,
-          "error",
+          "error"
         ];
       } else {
         return [
           `"${reactionInput}" is valid. Press Enter to send your reaction!`,
-          "success",
+          "success"
         ];
       }
     }

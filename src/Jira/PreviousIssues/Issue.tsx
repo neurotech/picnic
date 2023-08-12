@@ -91,7 +91,7 @@ export const Issue = ({
   issueText,
   issueTimestamp,
   isLast,
-  selected,
+  selected
 }: IssueProps) => {
   const readableDate = formatRelative(new Date(issueTimestamp), new Date());
   const formattedTimestamp =

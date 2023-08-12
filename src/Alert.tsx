@@ -42,7 +42,7 @@ export const Alert = ({
   className,
   level,
   stretch = false,
-  monospace = false,
+  monospace = false
 }: AlertProps) => (
   <StyledAlert
     monospace={monospace}

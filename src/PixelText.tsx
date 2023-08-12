@@ -14,7 +14,7 @@ interface StyledPixelTextProps {
 
 const fontFamilySizeMap = {
   "Px437 IBM VGA 8x16": "16px",
-  "GohuFont Medium": "11px",
+  "GohuFont Medium": "11px"
 };
 
 const StyledPixelText = styled.div<StyledPixelTextProps>`
@@ -37,7 +37,7 @@ const StyledPixelText = styled.div<StyledPixelTextProps>`
 
 export const PixelText = ({
   fontFamily = "Px437 IBM VGA 8x16",
-  text,
+  text
 }: PixelTextProps) => (
   <StyledPixelText fontFamily={fontFamily}>{text}</StyledPixelText>
 );

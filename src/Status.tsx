@@ -35,7 +35,9 @@ const StyledStatus = styled.div<Pick<StatusProps, "variant">>`
   background-color: ${(props) => props.theme.status[props.variant].background};
   color: ${(props) => props.theme.status[props.variant].color};
 
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 `;
 
 export const Status = ({ statusText, variant }: StatusProps) => (

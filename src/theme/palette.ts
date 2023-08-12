@@ -28,5 +28,5 @@ export const palette: Palette = {
   yellow: { main: "#fac319", light: "#ffdc7b", dark: "#472602" },
   grey: { main: "#aaaaaa", light: "#d9d9d9", dark: "#646464" },
   ash: { main: "#27282E", light: "#7a7d8c", dark: "#1B1D21" },
-  snow: { main: "#efefef", light: "#efefef", dark: "#efefef" },
+  snow: { main: "#efefef", light: "#efefef", dark: "#efefef" }
 };

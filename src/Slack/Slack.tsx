@@ -9,7 +9,7 @@ import {
   SlackStatusType,
   getAlertLevel,
   getSlackStatus,
-  getSuccessMessage,
+  getSuccessMessage
 } from "../utilities/slack";
 import { language } from "../utilities/language";
 import {
@@ -17,7 +17,7 @@ import {
   CrossCircledIcon,
   LinkBreak2Icon,
   MagicWandIcon,
-  SunIcon,
+  SunIcon
 } from "@radix-ui/react-icons";
 import { ProgressBar } from "../ProgressBar";
 import { Status, StatusVariant } from "../Status";
@@ -48,7 +48,7 @@ const getStatusVariant = (progress: number): StatusVariant => {
 const getStatusText = (statusTimeout: number) => {
   const timeoutAsDate = new Date(statusTimeout * 1000);
   const clearTime = format(timeoutAsDate, "h:mm a", {
-    locale: enAU,
+    locale: enAU
   });
   const readableDate = formatDistanceToNow(new Date(timeoutAsDate));
 

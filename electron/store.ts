@@ -15,5 +15,5 @@ export const defaultStoreValues: Store = {
   jiraUrl: "",
   jiraUsername: "",
   jiraToken: "",
-  slackToken: "",
+  slackToken: ""
 };

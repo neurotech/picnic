@@ -24,7 +24,7 @@ export const Column = ({
   children,
   flexGrow,
   flexShrink,
-  columnWidth,
+  columnWidth
 }: ColumnProps) => {
   const { space } = useContext(ColumnsContext);
 

@@ -89,7 +89,7 @@ export const App = () => {
                   onClick={() =>
                     setConfig((previousState) => ({
                       ...previousState,
-                      darkMode: !previousState.darkMode,
+                      darkMode: !previousState.darkMode
                     }))
                   }
                   variant="purple"

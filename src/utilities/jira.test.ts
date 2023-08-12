@@ -5,7 +5,7 @@ const getIssueTestCases = [
   { input: "FS-123", output: "fs-123" },
   { input: "DEV-28088", output: "dev-28088" },
   { input: "MoreThanTenCharactersLong", output: "" },
-  { input: "181820", output: "" },
+  { input: "181820", output: "" }
 ];
 
 describe("getIssue", () => {

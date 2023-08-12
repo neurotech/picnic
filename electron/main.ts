@@ -23,8 +23,8 @@ const createWindow = () => {
     darkTheme: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
-      sandbox: false,
-    },
+      sandbox: false
+    }
   });
 
   if (VITE_DEV_SERVER_URL) {

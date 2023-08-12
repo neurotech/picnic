@@ -12,7 +12,7 @@ const getTime = (nzFirst?: boolean) => {
   const formatString = "h:mm a";
   const localTime = format(now, formatString, { locale: enAU });
   const nzTime = format(utcToZonedTime(now, "Pacific/Auckland"), formatString, {
-    locale: enNZ,
+    locale: enNZ
   });
 
   if (nzFirst) {

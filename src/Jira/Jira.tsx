@@ -56,8 +56,8 @@ export const Jira = () => {
               {
                 key: matched.toUpperCase(),
                 text: issue.data?.issueText || "",
-                timestamp: new Date(),
-              },
+                timestamp: new Date()
+              }
             ]);
           }
 

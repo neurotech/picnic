@@ -37,7 +37,7 @@ interface SizeProperties {
 }
 const buttonSizes: Sizes = {
   default: { fontSize: "13px", padding: "0.5rem 0.75rem" },
-  small: { fontSize: "11px", padding: "0.1rem 0.5rem" },
+  small: { fontSize: "11px", padding: "0.1rem 0.5rem" }
 };
 
 const StyledButton = styled.button<StyledButtonProps>`
@@ -115,7 +115,7 @@ export const Button = ({
   onClick,
   stretch = false,
   variant = "blue",
-  size = "default",
+  size = "default"
 }: ButtonProps) => (
   <StyledButton
     disabled={disabled}

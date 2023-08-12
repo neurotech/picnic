@@ -58,7 +58,7 @@ export const Dossier = ({
   bodyContent,
   footerContent,
   position = "left",
-  variant = "blue",
+  variant = "blue"
 }: DossierProps) => (
   <DossierContainer>
     <DossierHeader position={position}>

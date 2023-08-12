@@ -7,7 +7,7 @@ import {
   phocasLetterEmoji,
   shoppingEmoji,
   sunshineEmoji,
-  teaEmoji,
+  teaEmoji
 } from "./emoji";
 import { language } from "./language";
 
@@ -69,9 +69,9 @@ export const getSlackStatus = (
         profile: {
           status_emoji: getBrbEmoji(),
           status_text: "BRB",
-          status_expiration: timeout,
+          status_expiration: timeout
         },
-        timeout,
+        timeout
       };
 
     case "lunch":
@@ -80,9 +80,9 @@ export const getSlackStatus = (
         profile: {
           status_emoji: getFoodEmoji(),
           status_text: "Lunch",
-          status_expiration: timeout,
+          status_expiration: timeout
         },
-        timeout,
+        timeout
       };
 
     case "sunshine":
@@ -91,9 +91,9 @@ export const getSlackStatus = (
         profile: {
           status_emoji: getSunshineEmoji(),
           status_text: "Sunshine break.",
-          status_expiration: timeout,
+          status_expiration: timeout
         },
-        timeout,
+        timeout
       };
 
     case "laundry":
@@ -102,9 +102,9 @@ export const getSlackStatus = (
         profile: {
           status_emoji: getLaundryEmoji(),
           status_text: "Laundry",
-          status_expiration: timeout,
+          status_expiration: timeout
         },
-        timeout,
+        timeout
       };
 
     case "tea":
@@ -113,9 +113,9 @@ export const getSlackStatus = (
         profile: {
           status_emoji: getTeaEmoji(),
           status_text: "Tea break ~",
-          status_expiration: timeout,
+          status_expiration: timeout
         },
-        timeout,
+        timeout
       };
 
     case "shopping":
@@ -124,9 +124,9 @@ export const getSlackStatus = (
         profile: {
           status_emoji: getShoppingEmoji(),
           status_text: "Food shopping has arrived.",
-          status_expiration: timeout,
+          status_expiration: timeout
         },
-        timeout,
+        timeout
       };
 
     case "clear":
@@ -135,9 +135,9 @@ export const getSlackStatus = (
         profile: {
           status_emoji: "",
           status_text: "",
-          status_expiration: 0,
+          status_expiration: 0
         },
-        timeout: 0,
+        timeout: 0
       };
   }
 };
