@@ -136,8 +136,8 @@ const lightButtons: Buttons = {
       background: palette.yellow.light,
       color: palette.yellow.dark,
       border: `${palette.yellow.dark}60`,
-      textShadow: `${palette.yellow.dark}13`,
-      dropShadow: `${palette.yellow.dark}13`,
+      textShadow: "transparent",
+      dropShadow: "transparent",
     },
     hover: {
       background: palette.yellow.main,
@@ -243,6 +243,15 @@ const dark: Theme = {
       placeholder: palette.ash.main,
     },
   },
+  progressBar: {
+    container: {
+      border: palette.ash.light,
+      background: palette.ash.dark,
+    },
+    bar: {
+      background: palette.ash.light,
+    },
+  },
 };
 
 const light: Theme = {
@@ -317,6 +326,15 @@ const light: Theme = {
       color: palette.ash.dark,
       border: palette.grey.dark,
       placeholder: palette.ash.light,
+    },
+  },
+  progressBar: {
+    container: {
+      border: palette.grey.dark,
+      background: palette.snow.main,
+    },
+    bar: {
+      background: palette.grey.main,
     },
   },
 };

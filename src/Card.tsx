@@ -21,16 +21,18 @@ const CardContainer = styled.div`
 const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
   border-bottom: 1px solid ${(props) => props.theme.card.border};
 `;
 
 const Header = styled.header`
   color: ${(props) => props.theme.card.header};
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
-  line-height: 17px;
-  padding: 1rem;
-  width: -webkit-fill-available;
+  line-height: 18px;
+
   user-select: none;
 `;
 

@@ -33,7 +33,7 @@ const DossierHeaderText = styled.div<
   user-select: none;
 `;
 const DossierBody = styled.div<Pick<DossierProps, "position" | "variant">>`
-  border: 2px solid ${(props) => palette[props.variant].main};
+  border: 1px solid ${(props) => palette[props.variant].main};
   display: flex;
   flex-direction: row;
   align-items: center;
