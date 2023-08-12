@@ -4,7 +4,7 @@ import { StatusVariant } from "../Status";
 
 export interface BaseColours {
   background: string;
-  color: string;
+  color?: string;
   border?: string;
   placeholder?: string;
   boxShadow?: string;
@@ -39,6 +39,11 @@ interface IssuesTheme {
   selected: BaseColours;
 }
 
+interface ProgressBar {
+  container: BaseColours;
+  bar: BaseColours;
+}
+
 declare module "@emotion/react" {
   export interface Theme {
     body: {
@@ -62,5 +67,6 @@ declare module "@emotion/react" {
     issues: IssuesTheme;
     status: Statuses;
     input: InputStates;
+    progressBar: ProgressBar;
   }
 }
