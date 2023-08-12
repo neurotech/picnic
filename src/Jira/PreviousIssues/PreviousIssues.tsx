@@ -58,18 +58,20 @@ export const PreviousIssues = ({
         )
       }
       footerContent={
-        <Button
-          size="small"
-          minWidth={10}
-          buttonText="Clear"
-          variant="red"
-          onClick={() => {
-            setIssues([]);
-            if (validIssue) {
-              window.Main.setClipboardText("");
-            }
-          }}
-        />
+        Boolean(issues.length) && (
+          <Button
+            size="small"
+            minWidth={10}
+            buttonText="Clear"
+            variant="red"
+            onClick={() => {
+              setIssues([]);
+              if (validIssue) {
+                window.Main.setClipboardText("");
+              }
+            }}
+          />
+        )
       }
     />
   );
