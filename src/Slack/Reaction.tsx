@@ -51,7 +51,7 @@ const getAlert = (
     }
   }
 
-  return ["Please copy a link to a Slack message to your clipboard.", "info"];
+  return ["Please copy a link to a Slack message.", "info"];
 };
 
 export const Reaction = ({ slackDetails }: ReactionProps) => {
