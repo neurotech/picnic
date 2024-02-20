@@ -7,6 +7,7 @@ export type ButtonVariant =
   | "purple"
   | "green"
   | "yellow"
+  | "pink"
   | "disabled";
 
 type ButtonSize = "default" | "small";

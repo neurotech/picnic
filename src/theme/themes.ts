@@ -68,6 +68,19 @@ const darkButtons: Buttons = {
       color: palette.yellow.dark
     }
   },
+  pink: {
+    base: {
+      background: palette.pink.light,
+      color: palette.pink.dark,
+      border: `${palette.pink.dark}80`,
+      textShadow: "transparent",
+      dropShadow: "transparent"
+    },
+    hover: {
+      background: palette.pink.light,
+      color: palette.pink.dark
+    }
+  },
   disabled: {
     base: {
       background: palette.ash.main,
@@ -142,6 +155,19 @@ const lightButtons: Buttons = {
     hover: {
       background: palette.yellow.main,
       color: palette.yellow.dark
+    }
+  },
+  pink: {
+    base: {
+      background: palette.pink.light,
+      color: palette.pink.dark,
+      border: `${palette.pink.dark}80`,
+      textShadow: "transparent",
+      dropShadow: "transparent"
+    },
+    hover: {
+      background: palette.pink.main,
+      color: palette.pink.dark
     }
   },
   disabled: {

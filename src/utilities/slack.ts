@@ -22,7 +22,9 @@ export type SlackStatusType =
   | "sunshine"
   | "laundry"
   | "tea"
-  | "shopping";
+  | "shopping"
+  | "monotasking60minutes"
+  | "monotasking30minutes";
 
 export interface SlackProfile {
   status_text: string;
@@ -35,9 +37,10 @@ export interface SlackStatusBody {
   timeout: number;
 }
 
-const getNowPlusOneHour = () => Math.floor(Date.now() / 1000) + 3600;
 const getNowPlusFiveMinutes = () => Math.floor(Date.now() / 1000) + 300;
 const getNowPlusFifteenMinutes = () => Math.floor(Date.now() / 1000) + 900;
+const getNowPlusThirtyMinutes = () => Math.floor(Date.now() / 1000) + 1800;
+const getNowPlusSixtyMinutes = () => Math.floor(Date.now() / 1000) + 3600;
 
 const getBrbEmoji = (): string =>
   brbEmoji[(brbEmoji.length * Math.random()) | 0];
@@ -75,7 +78,7 @@ export const getSlackStatus = (
       };
 
     case "lunch":
-      timeout = getNowPlusOneHour();
+      timeout = getNowPlusSixtyMinutes();
       return {
         profile: {
           status_emoji: getFoodEmoji(),
@@ -124,6 +127,28 @@ export const getSlackStatus = (
         profile: {
           status_emoji: getShoppingEmoji(),
           status_text: "Food shopping has arrived.",
+          status_expiration: timeout
+        },
+        timeout
+      };
+
+    case "monotasking30minutes":
+      timeout = getNowPlusThirtyMinutes();
+      return {
+        profile: {
+          status_emoji: ":workwork:",
+          status_text: "Monotasking",
+          status_expiration: timeout
+        },
+        timeout
+      };
+
+    case "monotasking60minutes":
+      timeout = getNowPlusSixtyMinutes();
+      return {
+        profile: {
+          status_emoji: ":workwork:",
+          status_text: "Monotasking",
           status_expiration: timeout
         },
         timeout

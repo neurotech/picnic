@@ -13,6 +13,7 @@ import {
 } from "../utilities/slack";
 import { language } from "../utilities/language";
 import {
+  CommitIcon,
   CookieIcon,
   CrossCircledIcon,
   LinkBreak2Icon,
@@ -149,7 +150,7 @@ export const Slack = () => {
     >
       <Stack>
         <Columns>
-          <Column columnWidth="25%">
+          <Column columnWidth="30%">
             <Stack>
               <Button
                 disabled={isLoading}
@@ -166,9 +167,17 @@ export const Slack = () => {
                 variant="green"
                 stretch
               />
+              <Button
+                disabled={isLoading}
+                buttonText="Monotasking (30m)"
+                icon={<CommitIcon />}
+                onClick={() => handleStatusClick("monotasking30minutes")}
+                variant="pink"
+                stretch
+              />
             </Stack>
           </Column>
-          <Column columnWidth="25%">
+          <Column columnWidth="30%">
             <Stack>
               <Button
                 disabled={isLoading}
@@ -186,9 +195,17 @@ export const Slack = () => {
                 variant="yellow"
                 stretch
               />
+              <Button
+                disabled={isLoading}
+                buttonText="Monotasking (60m)"
+                icon={<CommitIcon />}
+                onClick={() => handleStatusClick("monotasking60minutes")}
+                variant="pink"
+                stretch
+              />
             </Stack>
           </Column>
-          <Column columnWidth="50%">
+          <Column columnWidth="40%">
             <Alert
               alertText={statusText}
               level={getAlertLevel(currentStatus)}
