@@ -15,7 +15,13 @@ import { Card } from "./Card";
 import { ConfigDialog } from "./ConfigDialog";
 import { Reaction } from "./Slack/Reaction";
 import { SlackDetails, parseInputForSlackDetails } from "./utilities/slack";
-import { AllSidesIcon, GearIcon, MoonIcon } from "@radix-ui/react-icons";
+import {
+  AllSidesIcon,
+  CameraIcon,
+  GearIcon,
+  MoonIcon
+} from "@radix-ui/react-icons";
+import { DrivewayCamera } from "./DrivewayCamera/DrivewayCamera";
 
 const Container = styled.div`
   padding: 1rem;
@@ -28,6 +34,7 @@ const Container = styled.div`
 export const App = () => {
   const [configOpen, setConfigOpen] = useState<boolean>(false);
   const [config, setConfig] = useState<Store>(window.Main.store.get());
+  const [drivewayCameraOpen, setDrivewayCameraOpen] = useState<boolean>(false);
   const [slackDetails, setSlackDetails] = useState<SlackDetails | undefined>(
     undefined
   );
@@ -60,6 +67,7 @@ export const App = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyles theme={theme} />
       <ConfigDialog open={configOpen} />
+      <DrivewayCamera open={drivewayCameraOpen} />
       <Container>
         <Stack>
           <Columns>
@@ -82,7 +90,16 @@ export const App = () => {
 
           <Card heading="Tools">
             <Columns space="0.5rem" justifyContent="space-between">
-              <Column columnWidth="33%">
+              <Column columnWidth="25%">
+                <Button
+                  buttonText="Access Driveway Camera"
+                  icon={<CameraIcon />}
+                  onClick={() => setDrivewayCameraOpen(true)}
+                  variant="green"
+                  stretch
+                />
+              </Column>
+              <Column columnWidth="25%">
                 <Button
                   buttonText="Toggle Theme"
                   icon={<MoonIcon />}
@@ -96,7 +113,7 @@ export const App = () => {
                   stretch
                 />
               </Column>
-              <Column columnWidth="33%">
+              <Column columnWidth="25%">
                 <Button
                   buttonText="Resize Window"
                   icon={<AllSidesIcon />}
@@ -105,7 +122,7 @@ export const App = () => {
                   stretch
                 />
               </Column>
-              <Column columnWidth="33%">
+              <Column columnWidth="25%">
                 <Button
                   buttonText="Open Config"
                   icon={<GearIcon />}
