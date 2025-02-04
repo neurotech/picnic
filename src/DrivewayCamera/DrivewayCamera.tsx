@@ -1,12 +1,12 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
 
 interface DrivewayCameraProps {
-  open: boolean;
+  open: boolean
 }
 
 const DialogContainer = styled.div`
   z-index: 1000;
-`;
+`
 
 const Backdrop = styled.div`
   position: fixed;
@@ -21,7 +21,7 @@ const Backdrop = styled.div`
   top: 0;
   width: 100%;
   z-index: 9;
-`;
+`
 
 const StyledDrivewayCamera = styled.iframe`
   width: 95%;
@@ -30,15 +30,15 @@ const StyledDrivewayCamera = styled.iframe`
   border-radius: 4px;
   padding: 0;
   margin: 0 -1px 0 0;
-`;
+`
 
 export const DrivewayCamera = ({ open }: DrivewayCameraProps) => {
   if (open)
     return (
       <DialogContainer>
         <Backdrop>
-          <StyledDrivewayCamera src="http://localhost:8090/"></StyledDrivewayCamera>
+          <StyledDrivewayCamera src="http://localhost:8090/" />
         </Backdrop>
       </DialogContainer>
-    );
-};
+    )
+}

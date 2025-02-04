@@ -1,8 +1,10 @@
-import { Global, Theme, css } from "@emotion/react";
+import { Global, type Theme, css } from '@emotion/react'
 
 const getStyles = (theme: Theme) => {
   const styles = css`
-    :root {
+    html {
+      margin: 0;
+      padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
         Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
       font-weight: 400;
@@ -16,8 +18,9 @@ const getStyles = (theme: Theme) => {
       background-color: ${theme.body.background};
     }
 
-    body {
-      margin: 0;
+    #root {
+      height: 100vh;
+      display: flex;
     }
 
     // Josh W. Comeau Reset
@@ -75,10 +78,18 @@ const getStyles = (theme: Theme) => {
     #__next {
       isolation: isolate;
     }
-  `;
-  return styles;
-};
+
+    :root {
+      font-family: Inter, sans-serif;
+      font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
+    }
+    @supports (font-variation-settings: normal) {
+      :root { font-family: InterVariable, sans-serif; }
+    }
+  `
+  return styles
+}
 
 export const GlobalStyles = ({ theme }: { theme: Theme }) => (
   <Global styles={getStyles(theme)} />
-);
+)

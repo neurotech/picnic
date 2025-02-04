@@ -1,10 +1,10 @@
-import styled from "@emotion/styled";
-import { ReactNode } from "react";
+import styled from '@emotion/styled'
+import type { ReactNode } from 'react'
 
 interface CardProps {
-  children: ReactNode;
-  heading: string;
-  icon?: ReactNode;
+  children: ReactNode
+  heading: string
+  icon?: ReactNode
 }
 
 const CardContainer = styled.div`
@@ -16,31 +16,29 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-`;
+`
 
 const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: ${(props) => props.theme.spacing};
   border-bottom: 1px solid ${(props) => props.theme.card.border};
-`;
+`
 
 const Header = styled.header`
   color: ${(props) => props.theme.card.header};
-  font-size: 17px;
   font-weight: 500;
   line-height: 18px;
-
   user-select: none;
-`;
+`
 
 const CardContent = styled.div`
-  padding: 1rem;
+  padding: ${(props) => props.theme.spacing};
   display: flex;
   align-self: stretch;
-`;
+`
 
 export const Card = ({ children, heading, icon }: CardProps) => (
   <CardContainer>
@@ -50,4 +48,4 @@ export const Card = ({ children, heading, icon }: CardProps) => (
     </HeaderContainer>
     <CardContent>{children}</CardContent>
   </CardContainer>
-);
+)

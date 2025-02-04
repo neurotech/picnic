@@ -1,33 +1,32 @@
-import styled from "@emotion/styled";
-import { palette } from "../theme/palette";
+import styled from '@emotion/styled'
+import { palette } from '../theme/palette'
 
 interface TextInputProps
   extends React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   > {
-  active: boolean;
-  invalid?: boolean;
+  active: boolean
+  invalid?: boolean
 }
 
 const Input = styled.input<
-  Pick<TextInputProps, "active" | "disabled" | "invalid">
+  Pick<TextInputProps, 'active' | 'disabled' | 'invalid'>
 >`
-  min-height: 5rem;
-  padding: 1rem;
+  min-height: 3rem;
+  padding: 0.75rem;
   background-color: ${(props) => props.theme.input.base.background};
   color: ${(props) => props.theme.input.base.color};
   flex: 1;
-  font-size: 1.5rem;
 
-  border-radius: 4px;
-  border: 2px solid
+  border-radius: 3px;
+  border: 1px solid
     ${(props) =>
       props.invalid
         ? palette.red.main
         : props.active
-        ? palette.green.main
-        : props.theme.input.base.border};
+          ? palette.green.main
+          : props.theme.input.base.border};
 
   ::placeholder {
     color: ${(props) => props.theme.input.base.placeholder};
@@ -39,9 +38,9 @@ const Input = styled.input<
   :focus-within {
     outline: none;
     box-shadow: ${(props) =>
-        props.invalid
-          ? `${palette.red.main}40`
-          : props.active
+      props.invalid
+        ? `${palette.red.main}40`
+        : props.active
           ? `${palette.green.main}40`
           : props.theme.input.active.boxShadow}
       0px 0px 0px 4px;
@@ -51,8 +50,8 @@ const Input = styled.input<
       props.invalid
         ? palette.red.main
         : props.active
-        ? palette.green.main
-        : props.theme.input.active.border};
+          ? palette.green.main
+          : props.theme.input.active.border};
   }
 
   :disabled {
@@ -86,12 +85,12 @@ const Input = styled.input<
     background 0.2s,
     border 0.2s,
     box-shadow 0.2s;
-`;
+`
 
 export const TextInput = ({
   active,
   invalid = false,
   ...props
 }: TextInputProps) => {
-  return <Input active={active} invalid={invalid} {...props} />;
-};
+  return <Input active={active} invalid={invalid} {...props} />
+}

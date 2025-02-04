@@ -1,13 +1,13 @@
-import styled from "@emotion/styled";
-import { useState } from "react";
-import zalgo from "to-zalgo";
-import { Connector } from "../Connector";
-import { Column } from "../layout/Column";
-import { Columns } from "../layout/Columns";
-import { TextInput } from "./TextInput";
-import { palette } from "../theme/palette";
-import { css, keyframes } from "@emotion/react";
-import { getRandomInt } from "../utilities/numbers";
+import styled from '@emotion/styled'
+import { useState } from 'react'
+import zalgo from 'to-zalgo'
+import { Connector } from '../Connector'
+import { Column } from '../layout/Column'
+import { Columns } from '../layout/Columns'
+import { TextInput } from './TextInput'
+import { palette } from '../theme/palette'
+import { css, keyframes } from '@emotion/react'
+import { getRandomInt } from '../utilities/numbers'
 
 const shakeLittle = keyframes`
   2% {
@@ -160,7 +160,7 @@ const shakeLittle = keyframes`
   0%, 100% {
     transform: translate(0, 0) rotate(0);
   }
-`;
+`
 
 const getOutputAnimation = (active: boolean, seed: number) => {
   if (active) {
@@ -169,96 +169,96 @@ const getOutputAnimation = (active: boolean, seed: number) => {
       animation-timing-function: ease-in-out;
       animation-iteration-count: infinite;
       animation-duration: ${seed}ms;
-    `;
+    `
   }
 
-  return "none";
-};
+  return 'none'
+}
 
-const Container = styled.div``;
+const Container = styled.div``
 
 const ZalgoOutput = styled.div<{ active: boolean }>`
+  min-height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 5rem;
   flex: 1;
   text-align: center;
   align-self: center;
   padding: 1rem;
-  border: 2px solid rgba(0, 0, 0, 0.12);
+  border: 2px solid
+    ${(props) =>
+      props.active ? 'rgba(255, 0, 0, 0.66)' : props.theme.input.base.border};
   border-radius: 4px;
 
-  background-color: ${palette.black.main};
+  background-color:  ${(props) => (props.active ? palette.black.main : 'none')};
 
   color: red;
-  font-size: 22px;
+  font-size: 14px;
   line-height: 30px;
   font-family: "Times New Roman", Times, serif;
 
-  filter: ${(props) => (props.active ? "unset" : "grayscale(1)")};
-`;
+  filter: ${(props) => (props.active ? 'unset' : 'grayscale(1)')};
+`
 
 const Cage = styled.div<{ active: boolean; seed: number }>`
   filter: drop-shadow(2px 2px 4px rgba(255, 0, 0, 0.66));
   ${(props) => getOutputAnimation(props.active, props.seed)};
-`;
+`
 
 const ConnectorContainer = styled.div`
   align-self: center;
-`;
+`
 
 export const Zalgo = () => {
-  const [zalgoInput, setZalgoInput] = useState<string>("");
-  const [zalgoOutput, setZalgoOutput] = useState<string>("");
+  const [zalgoInput, setZalgoInput] = useState<string>('')
+  const [zalgoOutput, setZalgoOutput] = useState<string>('')
 
   const handleInput = (input: string) => {
-    setZalgoInput(input);
-    setZalgoOutput(zalgo(input));
-  };
+    setZalgoInput(input)
+    setZalgoOutput(zalgo(input))
+  }
 
   const handleSubmit = (key: string) => {
-    if (key === "Enter") {
-      const chimes = new Audio("./sounds/chimes.wav");
-      chimes.play();
-      window.Main.setClipboardText(zalgoOutput);
+    if (key === 'Enter') {
+      const chimes = new Audio('./sounds/chimes.wav')
+      chimes.play()
+      window.Main.setClipboardText(zalgoOutput)
     }
 
-    if (key === "Escape") {
-      handleInput("");
+    if (key === 'Escape') {
+      handleInput('')
     }
-  };
+  }
 
-  const isActive = zalgoInput !== "" || Boolean(zalgoInput);
+  const isActive = zalgoInput !== '' || Boolean(zalgoInput)
 
   return (
-    <Container>
-      <Columns space="0">
-        <Column columnWidth="50%">
-          <TextInput
-            active={isActive}
-            type="text"
-            value={zalgoInput}
-            onChange={(event) => handleInput(event.target.value)}
-            onKeyDown={(event) => handleSubmit(event.key)}
-            placeholder="zalgo text"
-          />
-        </Column>
-        <Column columnWidth="50px">
-          <ConnectorContainer>
-            <Connector active={isActive} />
-          </ConnectorContainer>
-        </Column>
-        <Column columnWidth="50%">
-          <ZalgoOutput active={isActive}>
-            {zalgoInput.split("").map((z) => (
-              <Cage seed={getRandomInt(80, 165)} active={isActive}>
-                {zalgo(z)}
-              </Cage>
-            ))}
-          </ZalgoOutput>
-        </Column>
-      </Columns>
-    </Container>
-  );
-};
+    <Columns space="0">
+      <Column columnWidth="50%">
+        <TextInput
+          active={isActive}
+          type="text"
+          value={zalgoInput}
+          onChange={(event) => handleInput(event.target.value)}
+          onKeyDown={(event) => handleSubmit(event.key)}
+          placeholder="zalgo text"
+        />
+      </Column>
+      <Column columnWidth="50px">
+        <ConnectorContainer>
+          <Connector active={isActive} />
+        </ConnectorContainer>
+      </Column>
+      <Column columnWidth="50%">
+        <ZalgoOutput active={isActive}>
+          {zalgoInput.split('').map((z) => (
+            <Cage key={'index'} seed={getRandomInt(80, 165)} active={isActive}>
+              {zalgo(z)}
+            </Cage>
+          ))}
+        </ZalgoOutput>
+      </Column>
+    </Columns>
+  )
+}

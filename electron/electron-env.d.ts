@@ -1,9 +1,9 @@
 /// <reference types="vite-plugin-electron/electron-env" />
-import { api } from "./preload";
+import type { api } from './preload'
 
 declare global {
   interface Window {
-    Main: typeof api;
+    Main: typeof api
   }
 }
 
@@ -22,8 +22,8 @@ declare namespace NodeJS {
      * │
      * ```
      */
-    DIST: string;
+    DIST: string
     /** /dist/ or /public/ */
-    PUBLIC: string;
+    PUBLIC: string
   }
 }

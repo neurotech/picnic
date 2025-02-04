@@ -1,79 +1,91 @@
-import { app, BrowserWindow, ipcMain, IpcMainEvent, screen } from "electron";
-import path from "node:path";
-import { defaultStoreValues, Store } from "./store";
-import { Low } from "lowdb";
-import { JSONFile } from "lowdb/node";
+import {
+  app,
+  BrowserWindow,
+  ipcMain,
+  type IpcMainEvent,
+  screen
+} from 'electron'
+import path from 'node:path'
+import { defaultStoreValues, type Store } from './store'
+import { Low } from 'lowdb'
+import { JSONFile } from 'lowdb/node'
 
-process.env.DIST = path.join(__dirname, "../dist");
+process.env.DIST = path.join(__dirname, '../dist')
 process.env.PUBLIC = app.isPackaged
   ? process.env.DIST
-  : path.join(process.env.DIST, "../public");
+  : path.join(process.env.DIST, '../public')
 
-let win: BrowserWindow | null;
-const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
+let win: BrowserWindow | null
+const VITE_DEV_SERVER_URL = process.env.VITE_DEV_SERVER_URL
+
+const resizeWindow = () => {
+  const farMonitor: number = screen
+    .getAllDisplays()
+    .map((display) => display.bounds.x)
+    .sort((a, b) => b - a)[0]
+
+  win?.unmaximize()
+  win?.setBounds({ x: farMonitor - 8, y: 0, width: 1386, height: 1040 })
+}
 
 const createWindow = () => {
-  if (!process.env.PUBLIC) throw new Error("PUBLIC env var is undefined!");
+  if (!process.env.PUBLIC) throw new Error('PUBLIC env var is undefined!')
 
   win = new BrowserWindow({
-    backgroundColor: "#181a20",
+    backgroundColor: '#181a20',
     width: 1280,
     height: 840,
     autoHideMenuBar: true,
     darkTheme: true,
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      preload: path.join(__dirname, 'preload.js'),
       sandbox: false
     }
-  });
+  })
 
   if (VITE_DEV_SERVER_URL) {
-    win.loadURL(VITE_DEV_SERVER_URL);
+    win.loadURL(VITE_DEV_SERVER_URL)
   } else {
-    if (!process.env.DIST) throw new Error("DIST env var is undefined!");
-    win.loadFile(path.join(process.env.DIST, "index.html"));
+    if (!process.env.DIST) throw new Error('DIST env var is undefined!')
+    win.loadFile(path.join(process.env.DIST, 'index.html'))
   }
-};
+
+  //resizeWindow()
+}
 
 const registerConfig = async () => {
-  const __dirname = app.getPath("userData");
-  const file = path.join(__dirname, "config.json");
-  const adapter = new JSONFile<Store>(file);
-  const store = new Low(adapter, defaultStoreValues);
-  await store.read();
+  const __dirname = app.getPath('userData')
+  const file = path.join(__dirname, 'config.json')
+  const adapter = new JSONFile<Store>(file)
+  const store = new Low(adapter, defaultStoreValues)
+  await store.read()
 
-  store.data = { ...defaultStoreValues, ...store.data };
-  await store.write();
+  store.data = { ...defaultStoreValues, ...store.data }
+  await store.write()
 
-  ipcMain.on("store-get", async (event: IpcMainEvent) => {
-    event.returnValue = store.data;
-  });
+  ipcMain.on('store-get', async (event: IpcMainEvent) => {
+    event.returnValue = store.data
+  })
 
-  ipcMain.on("store-set", async (event: IpcMainEvent, config: Store) => {
-    store.data = config;
-    await store.write();
-    event.returnValue = "ok";
-  });
+  ipcMain.on('store-set', async (event: IpcMainEvent, config: Store) => {
+    store.data = config
+    await store.write()
+    event.returnValue = 'ok'
+  })
 
-  ipcMain.on("resize-window", async (event: IpcMainEvent) => {
-    const farMonitor: number = screen
-      .getAllDisplays()
-      .map((display) => display.bounds.x)
-      .sort((a, b) => b - a)[0];
+  ipcMain.on('resize-window', async (event: IpcMainEvent) => {
+    resizeWindow()
+    event.returnValue = 'ok'
+  })
+}
 
-    win?.unmaximize();
-    win?.setBounds({ x: farMonitor - 8, y: 0, width: 1386, height: 1040 });
-
-    event.returnValue = "ok";
-  });
-};
-
-app.on("window-all-closed", () => {
-  win = null;
-});
+app.on('window-all-closed', () => {
+  win = null
+  app.quit()
+})
 
 app
-  .on("ready", createWindow)
+  .on('ready', createWindow)
   .whenReady()
   .then(registerConfig)
-  .catch((e) => console.error(e));
+  .catch((e) => console.error(e))

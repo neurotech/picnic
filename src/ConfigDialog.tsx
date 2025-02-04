@@ -1,23 +1,23 @@
-import styled from "@emotion/styled";
-import { palette } from "./theme/palette";
-import { keyframes } from "@emotion/react";
+import styled from '@emotion/styled'
+import { palette } from './theme/palette'
+import { keyframes } from '@emotion/react'
 
 interface ConfigDialogProps {
-  open: boolean;
+  open: boolean
 }
 
 const getBackdropUrl = (darkMode: boolean) =>
-  `url(./images/config-bg-${darkMode ? "dark" : "light"}.png)`;
+  `url(./images/config-bg-${darkMode ? 'dark' : 'light'}.png)`
 
 const scroll = keyframes`
   100% {
     background-position: -3000px 3000px;
   }
-`;
+`
 
 const DialogContainer = styled.div<{ isOpen: boolean }>`
   z-index: 1000;
-`;
+`
 
 const Backdrop = styled.div<{ darkMode: boolean }>`
   position: fixed;
@@ -40,7 +40,7 @@ const Backdrop = styled.div<{ darkMode: boolean }>`
   top: 0;
   width: 100%;
   z-index: 9;
-`;
+`
 
 const Dialog = styled.div`
   background-color: ${palette.ash.main};
@@ -51,24 +51,24 @@ const Dialog = styled.div`
   width: 100%;
   height: 100%;
   z-index: 10;
-`;
+`
 const Header = styled.div`
   border-bottom: 1px solid ${palette.grey.main};
   padding-bottom: 1rem;
   min-height: 4rem;
-`;
+`
 const Content = styled.div`
   flex: 1;
   padding-bottom: 1rem;
-`;
+`
 const Footer = styled.div`
   border-top: 1px solid ${palette.grey.main};
   padding-top: 1rem;
   min-height: 4rem;
-`;
+`
 
 export const ConfigDialog = ({ open }: ConfigDialogProps) => {
-  const darkMode = window.Main.store.get().darkMode;
+  const darkMode = window.Main.store.get().darkMode
 
   return (
     <>
@@ -76,13 +76,13 @@ export const ConfigDialog = ({ open }: ConfigDialogProps) => {
         <DialogContainer isOpen={open}>
           <Backdrop darkMode={darkMode}>
             <Dialog>
-              <Header></Header>
-              <Content></Content>
-              <Footer></Footer>
+              <Header />
+              <Content />
+              <Footer />
             </Dialog>
           </Backdrop>
         </DialogContainer>
       )}
     </>
-  );
-};
+  )
+}

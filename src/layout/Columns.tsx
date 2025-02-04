@@ -1,14 +1,14 @@
-import styled from "@emotion/styled";
-import { createContext } from "react";
+import styled from '@emotion/styled'
+import { createContext } from 'react'
 
 interface ColumnsProps {
-  alignItems?: string;
-  children?: React.ReactNode;
-  flexWrap?: string;
-  flow?: string;
-  justifyContent?: string;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-  space?: string;
+  alignItems?: string
+  children?: React.ReactNode
+  flexWrap?: string
+  flow?: string
+  justifyContent?: string
+  onClick?: React.MouseEventHandler<HTMLDivElement>
+  space?: string
 }
 
 const StyledColumns = styled.div<ColumnsProps>`
@@ -21,20 +21,20 @@ const StyledColumns = styled.div<ColumnsProps>`
   justify-content: ${(props) => props.justifyContent};
   margin-left: -${(props) => props.space};
   overflow-wrap: break-word;
-`;
+`
 
 export const ColumnsContext = createContext({
-  space: "1rem"
-});
+  space: '0.5rem'
+})
 
 export const Columns = ({
   alignItems,
   children,
   flexWrap,
   flow,
-  justifyContent = "flex-start",
+  justifyContent = 'flex-start',
   onClick,
-  space = "1rem"
+  space = '0.5rem'
 }: ColumnsProps) => {
   return (
     <StyledColumns
@@ -49,5 +49,5 @@ export const Columns = ({
         {children}
       </ColumnsContext.Provider>
     </StyledColumns>
-  );
-};
+  )
+}

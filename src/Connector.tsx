@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import { css, keyframes } from "@emotion/react";
-import { palette } from "./theme/palette";
+import styled from '@emotion/styled'
+import { css, keyframes } from '@emotion/react'
+import { palette } from './theme/palette'
 
 const flow = keyframes`
   from {
@@ -9,7 +9,7 @@ const flow = keyframes`
   to {
     stroke-dashoffset:0;
   }
-`;
+`
 
 const FlowLine = styled.line<{ active: boolean }>`
   shape-rendering: geometricprecision;
@@ -24,10 +24,10 @@ const FlowLine = styled.line<{ active: boolean }>`
       ? css`
           ${flow} 10s linear 0s forwards infinite
         `
-      : "none"};
+      : 'none'};
 
   transition: stroke 0.25s;
-`;
+`
 
 export const Connector = ({ active }: { active: boolean }) => {
   return (
@@ -38,7 +38,8 @@ export const Connector = ({ active }: { active: boolean }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <title>Connector</title>
       <FlowLine active={active} y1="1" x2="50" y2="1" />
     </svg>
-  );
-};
+  )
+}

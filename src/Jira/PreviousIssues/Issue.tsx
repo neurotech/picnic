@@ -1,20 +1,20 @@
-import styled from "@emotion/styled";
-import formatRelative from "date-fns/formatRelative";
-import { Column } from "../../layout/Column";
-import { Columns } from "../../layout/Columns";
-import { palette } from "../../theme/palette";
-import { Status } from "../../Status";
+import styled from '@emotion/styled'
+import formatRelative from 'date-fns/formatRelative'
+import { Column } from '../../layout/Column'
+import { Columns } from '../../layout/Columns'
+import { palette } from '../../theme/palette'
+import { Status } from '../../Status'
 
 interface IssueProps {
-  issueKey: string;
-  issueText: string;
-  issueTimestamp: Date;
-  isLast: boolean;
-  selected: boolean;
+  issueKey: string
+  issueText: string
+  issueTimestamp: Date
+  isLast: boolean
+  selected: boolean
 }
 
-const truncate = (string = "", maxLength = 65) =>
-  string.length > maxLength ? `${string.substring(0, maxLength)}…` : string;
+const truncate = (string = '', maxLength = 65) =>
+  string.length > maxLength ? `${string.substring(0, maxLength)}…` : string
 
 const IssueContainer = styled.div<{ selected: boolean; isLast: boolean }>`
   user-select: none;
@@ -25,12 +25,10 @@ const IssueContainer = styled.div<{ selected: boolean; isLast: boolean }>`
   align-items: center;
   flex: 1;
   padding: 0.5rem 0.25rem;
-
-  font-size: 11px;
   line-height: 11px;
 
   border-bottom: ${(props) =>
-    props.isLast ? "unset" : `1px solid ${props.theme.issues.base.border}`};
+    props.isLast ? 'unset' : `1px solid ${props.theme.issues.base.border}`};
 
   background-color: ${(props) =>
     props.selected
@@ -61,7 +59,7 @@ const IssueContainer = styled.div<{ selected: boolean; isLast: boolean }>`
   }
 
   transition: background-color 0.15s;
-`;
+`
 
 const IssueKey = styled.div`
   text-align: center;
@@ -70,11 +68,11 @@ const IssueKey = styled.div`
   justify-content: center;
   display: flex;
   flex: 1;
-`;
+`
 const IssueText = styled.div`
   display: flex;
   align-items: center;
-`;
+`
 const IssueTimestamp = styled.div`
   display: flex;
   align-items: center;
@@ -84,18 +82,18 @@ const IssueTimestamp = styled.div`
   color: ${palette.ash.light};
   flex: 1;
   padding-right: 0.25rem;
-`;
+`
 
-export const Issue = ({
+export const IssueRow = ({
   issueKey,
   issueText,
   issueTimestamp,
   isLast,
   selected
 }: IssueProps) => {
-  const readableDate = formatRelative(new Date(issueTimestamp), new Date());
+  const readableDate = formatRelative(new Date(issueTimestamp), new Date())
   const formattedTimestamp =
-    readableDate.charAt(0).toUpperCase() + readableDate.slice(1);
+    readableDate.charAt(0).toUpperCase() + readableDate.slice(1)
 
   return (
     <IssueContainer
@@ -109,12 +107,12 @@ export const Issue = ({
           <Columns>
             <Column flexGrow={0} flexShrink={0} columnWidth="90px">
               <IssueKey>
-                <Status variant={"indigo"} statusText={issueKey} />
+                <Status variant={'indigo'} statusText={issueKey} />
               </IssueKey>
             </Column>
             <Column>
               <IssueText>
-                <Status variant={"azure"} statusText={truncate(issueText)} />
+                <Status variant={'azure'} statusText={truncate(issueText)} />
               </IssueText>
             </Column>
           </Columns>
@@ -124,5 +122,5 @@ export const Issue = ({
         </Column>
       </Columns>
     </IssueContainer>
-  );
-};
+  )
+}

@@ -1,13 +1,13 @@
-import styled from "@emotion/styled";
-import { useContext } from "react";
-import { ColumnsContext } from "./Columns";
+import styled from '@emotion/styled'
+import { useContext } from 'react'
+import { ColumnsContext } from './Columns'
 
 interface ColumnProps {
-  children?: React.ReactNode;
-  flexGrow?: number;
-  flexShrink?: number;
-  space?: string;
-  columnWidth?: string;
+  children?: React.ReactNode
+  flexGrow?: number
+  flexShrink?: number
+  space?: string
+  columnWidth?: string
 }
 
 const StyledColumn = styled.div<ColumnProps>`
@@ -17,8 +17,8 @@ const StyledColumn = styled.div<ColumnProps>`
   flex-shrink: ${(props) => props.flexShrink};
   min-width: 0;
   padding-left: ${(props) => props.space};
-  width: ${(props) => (props.columnWidth ? props.columnWidth : "unset")};
-`;
+  width: ${(props) => (props.columnWidth ? props.columnWidth : 'unset')};
+`
 
 export const Column = ({
   children,
@@ -26,7 +26,7 @@ export const Column = ({
   flexShrink,
   columnWidth
 }: ColumnProps) => {
-  const { space } = useContext(ColumnsContext);
+  const { space } = useContext(ColumnsContext)
 
   return (
     <StyledColumn
@@ -37,5 +37,5 @@ export const Column = ({
     >
       {children}
     </StyledColumn>
-  );
-};
+  )
+}

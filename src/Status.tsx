@@ -1,26 +1,26 @@
-import styled from "@emotion/styled";
-import { ReactNode } from "react";
+import styled from '@emotion/styled'
+import type { ReactNode } from 'react'
 
 export type StatusVariant =
-  | "blue"
-  | "azure"
-  | "indigo"
-  | "purple"
-  | "pink"
-  | "red"
-  | "orange"
-  | "yellow"
-  | "lime"
-  | "green"
-  | "teal"
-  | "cyan";
+  | 'blue'
+  | 'azure'
+  | 'indigo'
+  | 'purple'
+  | 'pink'
+  | 'red'
+  | 'orange'
+  | 'yellow'
+  | 'lime'
+  | 'green'
+  | 'teal'
+  | 'cyan'
 
 interface StatusProps {
-  statusText: string | ReactNode;
-  variant: StatusVariant;
+  statusText: string | ReactNode
+  variant: StatusVariant
 }
 
-const StyledStatus = styled.div<Pick<StatusProps, "variant">>`
+const StyledStatus = styled.div<Pick<StatusProps, 'variant'>>`
   display: flex;
   align-items: center;
   padding: 0.15rem 0.75rem;
@@ -38,8 +38,8 @@ const StyledStatus = styled.div<Pick<StatusProps, "variant">>`
   transition:
     background-color 0.2s,
     color 0.2s;
-`;
+`
 
 export const Status = ({ statusText, variant }: StatusProps) => (
   <StyledStatus variant={variant}>{statusText}</StyledStatus>
-);
+)

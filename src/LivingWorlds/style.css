@@ -1,0 +1,17 @@
+body {
+	background: #000;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+
+#living-worlds-container {
+	display: flex;
+	justify-content: center;
+}
+
+#mycanvas {
+	z-index: 2;
+	transform: translate3d(0px, 0px, 0px) scale(1);
+	transform-origin: 0px 0px;
+}

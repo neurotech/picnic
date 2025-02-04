@@ -1,21 +1,21 @@
-import styled from "@emotion/styled";
-import { ReactNode } from "react";
+import styled from '@emotion/styled'
+import type { ReactNode } from 'react'
 
-type PixelFont = "Px437 IBM VGA 8x16" | "GohuFont Medium";
+type PixelFont = 'Px437 IBM VGA 8x16' | 'GohuFont Medium'
 
 interface PixelTextProps {
-  text: string | ReactNode;
-  fontFamily?: PixelFont;
+  text: string | ReactNode
+  fontFamily?: PixelFont
 }
 
 interface StyledPixelTextProps {
-  fontFamily: PixelFont;
+  fontFamily: PixelFont
 }
 
 const fontFamilySizeMap = {
-  "Px437 IBM VGA 8x16": "16px",
-  "GohuFont Medium": "11px"
-};
+  'Px437 IBM VGA 8x16': '16px',
+  'GohuFont Medium': '11px'
+}
 
 const StyledPixelText = styled.div<StyledPixelTextProps>`
   font-family: "${(props) => props.fontFamily}";
@@ -33,11 +33,11 @@ const StyledPixelText = styled.div<StyledPixelTextProps>`
   white-space: pre-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
-`;
+`
 
 export const PixelText = ({
-  fontFamily = "Px437 IBM VGA 8x16",
+  fontFamily = 'Px437 IBM VGA 8x16',
   text
 }: PixelTextProps) => (
   <StyledPixelText fontFamily={fontFamily}>{text}</StyledPixelText>
-);
+)

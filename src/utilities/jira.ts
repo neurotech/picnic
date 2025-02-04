@@ -1,25 +1,27 @@
 function isNumeric(input: string) {
-  if (typeof input != "string") return false;
-  return !isNaN(parseFloat(input));
+  if (typeof input !== 'string') return false
+  return !Number.isNaN(Number.parseFloat(input))
 }
 
 export const getIssue = (rawText: string): string => {
-  let issue = "";
+  let issue = ''
   const invalid =
-    typeof rawText !== "string" ||
+    typeof rawText !== 'string' ||
     rawText.length >= 10 ||
     isNumeric(rawText) ||
-    (!rawText.toLowerCase().startsWith("fs") &&
-      !rawText.toLowerCase().startsWith("dev"));
+    (!rawText.toLowerCase().startsWith('pa') &&
+      !rawText.toLowerCase().startsWith('fs') &&
+      !rawText.toLowerCase().startsWith('dev') &&
+      !rawText.toLowerCase().startsWith('star'))
 
-  if (invalid) return issue;
+  if (invalid) return issue
 
-  const expression = /^([fs-]*[dev-]*)+\d+/gm;
-  const matched = rawText.toLowerCase().match(expression);
+  const expression = /^([pa-]*[fs-]*[dev-]*[star-]*)+\d+/gm
+  const matched = rawText.toLowerCase().match(expression)
 
   if (matched?.length) {
-    issue = matched[0];
+    issue = matched[0]
   }
 
-  return issue.toLowerCase();
-};
+  return issue.toLowerCase()
+}
