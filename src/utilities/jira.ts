@@ -4,24 +4,24 @@ function isNumeric(input: string) {
 }
 
 export const getIssue = (rawText: string): string => {
-  let issue = ''
   const invalid =
     typeof rawText !== 'string' ||
     rawText.length >= 10 ||
     isNumeric(rawText) ||
-    (!rawText.toLowerCase().startsWith('pa') &&
+    (!rawText.toLowerCase().startsWith('an') &&
+      !rawText.toLowerCase().startsWith('pa') &&
       !rawText.toLowerCase().startsWith('fs') &&
       !rawText.toLowerCase().startsWith('dev') &&
       !rawText.toLowerCase().startsWith('star'))
 
-  if (invalid) return issue
+  if (invalid) return ''
 
-  const expression = /^([pa-]*[fs-]*[dev-]*[star-]*)+\d+/gm
+  const expression = /^([an-]*[pa-]*[fs-]*[dev-]*[star-]*)+\d+/gm
   const matched = rawText.toLowerCase().match(expression)
 
   if (matched?.length) {
-    issue = matched[0]
+    return matched[0].toLowerCase()
   }
 
-  return issue.toLowerCase()
+  return ''
 }
