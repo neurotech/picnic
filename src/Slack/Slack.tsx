@@ -13,7 +13,6 @@ import {
 } from '../utilities/slack'
 import { language } from '../utilities/language'
 import {
-  CommitIcon,
   CookieIcon,
   CrossCircledIcon,
   LinkBreak2Icon,

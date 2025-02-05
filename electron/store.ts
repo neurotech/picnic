@@ -1,4 +1,4 @@
-import type { IssueRow } from '../src/Jira/PreviousIssues/PreviousIssues'
+import type { Issue } from "../src/Jira/PreviousIssues/PreviousIssues"
 
 export interface Store {
   darkMode: boolean

@@ -175,8 +175,6 @@ const getOutputAnimation = (active: boolean, seed: number) => {
   return 'none'
 }
 
-const Container = styled.div``
-
 const ZalgoOutput = styled.div<{ active: boolean }>`
   min-height: 3rem;
   display: flex;
