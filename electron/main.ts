@@ -50,7 +50,7 @@ const createWindow = () => {
     win.loadFile(path.join(process.env.DIST, 'index.html'))
   }
 
-  //resizeWindow()
+  resizeWindow()
 }
 
 const registerConfig = async () => {
