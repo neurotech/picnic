@@ -55,8 +55,6 @@ var CanvasCycle = {
           CanvasCycle.highlightColor = -1
         }
       }
-      var div = document.createElement('div')
-      div.className = 'clear'
 
       // pick starting scene
       // var initialSceneIdx = Math.floor( Math.random() * scenes.length );
@@ -65,7 +63,6 @@ var CanvasCycle = {
       // read prefs from cookie
       var prefs = this.cookie.get('settings')
       if (prefs) {
-        if (prefs.showOptions) this.toggleOptions()
         this.setRate(240)
         this.setSpeed(prefs.speedAdjust)
         this.setBlendShift(prefs.blendShiftEnabled)
@@ -73,6 +70,10 @@ var CanvasCycle = {
 
       this.loadImage(scenes[initialSceneIdx].name)
       this.sceneIdx = initialSceneIdx
+
+      setInterval(() => {
+        this.randomScene()
+      }, 120000);
     }
   },
 
@@ -82,7 +83,7 @@ var CanvasCycle = {
     TweenManager.removeAll({ category: 'scenefade' })
     TweenManager.tween({
       target: { value: this.globalBrightness, newSceneName: name },
-      duration: Math.floor(this.settings.targetFPS / 2),
+      duration: 15,
       mode: 'EaseInOut',
       algo: 'Quadratic',
       props: { value: 0.0 },
@@ -100,7 +101,7 @@ var CanvasCycle = {
     // load image JSON from the server
     this.stop()
 
-    var payload = await fetch(`/src/LivingWorlds/images/${name}`)
+    var payload = await fetch(`./images/${name}`)
     var payloadJSON = await payload.json()
     CanvasCycle.processImage(payloadJSON)
   },
@@ -142,7 +143,7 @@ var CanvasCycle = {
       TweenManager.removeAll({ category: 'scenefade' })
       TweenManager.tween({
         target: { value: 0 },
-        duration: Math.floor(this.settings.targetFPS / 2),
+        duration: 50,
         mode: 'EaseInOut',
         algo: 'Quadratic',
         props: { value: 1.0 },

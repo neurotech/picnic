@@ -11,7 +11,7 @@ export const LivingWorlds = () => {
       <StyledIframe
         width={640}
         height={480}
-        src="/src/LivingWorlds/index.html"
+        src={'./living-worlds/index.html'}
         title="living-worlds"
       />
     </Card>

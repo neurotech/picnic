@@ -6,9 +6,9 @@
     "ignore": [
       "**/dist",
       "**/dist-electron",
-      "**/src/LivingWorlds/*.js",
-      "**/src/LivingWorlds/*.css",
-      "**/src/LivingWorlds/*.json"
+      "**/public/living-worlds/*.js",
+      "**/public/living-worlds/*.css",
+      "**/public/living-worlds/images/*.json"
     ]
   },
   "formatter": {
